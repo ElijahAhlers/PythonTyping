@@ -1,0 +1,936 @@
+Help on class App in module kivy.app:
+
+class App(kivy._event.EventDispatcher)
+ |  App(**kwargs)
+ |  
+ |  Application class, see module documentation for more information.
+ |  
+ |  :Events:
+ |      `on_start`:
+ |          Fired when the application is being started (before the
+ |          :func:`~kivy.base.runTouchApp` call.
+ |      `on_stop`:
+ |          Fired when the application stops.
+ |      `on_pause`:
+ |          Fired when the application is paused by the OS.
+ |      `on_resume`:
+ |          Fired when the application is resumed from pause by the OS. Beware:
+ |          you have no guarantee that this event will be fired after the
+ |          `on_pause` event has been called.
+ |  
+ |  .. versionchanged:: 1.7.0
+ |      Parameter `kv_file` added.
+ |  
+ |  .. versionchanged:: 1.8.0
+ |      Parameters `kv_file` and `kv_directory` are now properties of App.
+ |  
+ |  Method resolution order:
+ |      App
+ |      kivy._event.EventDispatcher
+ |      kivy._event.ObjectWithUid
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  build(self)
+ |      Initializes the application; it will be called only once.
+ |      If this method returns a widget (tree), it will be used as the root
+ |      widget and added to the window.
+ |      
+ |      :return:
+ |          None or a root :class:`~kivy.uix.widget.Widget` instance
+ |          if no self.root exists.
+ |  
+ |  build_config(self, config)
+ |      .. versionadded:: 1.0.7
+ |      
+ |      This method is called before the application is initialized to
+ |      construct your :class:`~kivy.config.ConfigParser` object. This
+ |      is where you can put any default section / key / value for your
+ |      config. If anything is set, the configuration will be
+ |      automatically saved in the file returned by
+ |      :meth:`get_application_config`.
+ |      
+ |      :Parameters:
+ |          `config`: :class:`~kivy.config.ConfigParser`
+ |              Use this to add default section / key / value items
+ |  
+ |  build_settings(self, settings)
+ |      .. versionadded:: 1.0.7
+ |      
+ |      This method is called when the user (or you) want to show the
+ |      application settings. It is called once when the settings panel
+ |      is first opened, after which the panel is cached. It may be
+ |      called again if the cached settings panel is removed by
+ |      :meth:`destroy_settings`.
+ |      
+ |      You can use this method to add settings panels and to
+ |      customise the settings widget e.g. by changing the sidebar
+ |      width. See the module documentation for full details.
+ |      
+ |      :Parameters:
+ |          `settings`: :class:`~kivy.uix.settings.Settings`
+ |              Settings instance for adding panels
+ |  
+ |  close_settings(self, *largs)
+ |      Close the previously opened settings panel.
+ |      
+ |      :return:
+ |          True if the settings has been closed.
+ |  
+ |  create_settings(self)
+ |      Create the settings panel. This method will normally
+ |      be called only one time per
+ |      application life-time and the result is cached internally,
+ |      but it may be called again if the cached panel is removed
+ |      by :meth:`destroy_settings`.
+ |      
+ |      By default, it will build a settings panel according to
+ |      :attr:`settings_cls`, call :meth:`build_settings`, add a Kivy panel if
+ |      :attr:`use_kivy_settings` is True, and bind to
+ |      on_close/on_config_change.
+ |      
+ |      If you want to plug your own way of doing settings, without the Kivy
+ |      panel or close/config change events, this is the method you want to
+ |      overload.
+ |      
+ |      .. versionadded:: 1.8.0
+ |  
+ |  destroy_settings(self)
+ |      .. versionadded:: 1.8.0
+ |      
+ |      Dereferences the current settings panel if one
+ |      exists. This means that when :meth:`App.open_settings` is next
+ |      run, a new panel will be created and displayed. It doesn't
+ |      affect any of the contents of the panel, but lets you (for
+ |      instance) refresh the settings panel layout if you have
+ |      changed the settings widget in response to a screen size
+ |      change.
+ |      
+ |      If you have modified :meth:`~App.open_settings` or
+ |      :meth:`~App.display_settings`, you should be careful to
+ |      correctly detect if the previous settings widget has been
+ |      destroyed.
+ |  
+ |  display_settings(self, settings)
+ |      .. versionadded:: 1.8.0
+ |      
+ |      Display the settings panel. By default, the panel is drawn directly
+ |      on top of the window. You can define other behaviour by overriding
+ |      this method, such as adding it to a ScreenManager or Popup.
+ |      
+ |      You should return True if the display is successful, otherwise False.
+ |      
+ |      :Parameters:
+ |          `settings`: :class:`~kivy.uix.settings.Settings`
+ |              You can modify this object in order to modify the settings
+ |              display.
+ |  
+ |  get_application_config(self, defaultpath='%(appdir)s/%(appname)s.ini')
+ |      Return the filename of your application configuration. Depending
+ |      on the platform, the application file will be stored in
+ |      different locations:
+ |      
+ |          - on iOS: <appdir>/Documents/.<appname>.ini
+ |          - on Android: <user_data_dir>/.<appname>.ini
+ |          - otherwise: <appdir>/<appname>.ini
+ |      
+ |      When you are distributing your application on Desktops, please
+ |      note that if the application is meant to be installed
+ |      system-wide, the user might not have write-access to the
+ |      application directory. If you want to store user settings, you
+ |      should overload this method and change the default behavior to
+ |      save the configuration file in the user directory. ::
+ |      
+ |          class TestApp(App):
+ |              def get_application_config(self):
+ |                  return super(TestApp, self).get_application_config(
+ |                      '~/.%(appname)s.ini')
+ |      
+ |      Some notes:
+ |      
+ |      - The tilda '~' will be expanded to the user directory.
+ |      - %(appdir)s will be replaced with the application :attr:`directory`
+ |      - %(appname)s will be replaced with the application :attr:`name`
+ |      
+ |      .. versionadded:: 1.0.7
+ |      
+ |      .. versionchanged:: 1.4.0
+ |          Customized the defaultpath for iOS and Android platforms. Added a
+ |          defaultpath parameter for desktop OS's (not applicable to iOS
+ |          and Android.)
+ |      
+ |      .. versionchanged:: 1.11.0
+ |          Changed the Android version to make use of the
+ |          :attr:`~App.user_data_dir` and added a missing dot to the iOS
+ |          config file name.
+ |  
+ |  get_application_icon(self)
+ |      Return the icon of the application.
+ |  
+ |  get_application_name(self)
+ |      Return the name of the application.
+ |  
+ |  load_config(self)
+ |      (internal) This function is used for returning a ConfigParser with
+ |      the application configuration. It's doing 3 things:
+ |      
+ |          #. Creating an instance of a ConfigParser
+ |          #. Loading the default configuration by calling
+ |             :meth:`build_config`, then
+ |          #. If it exists, it loads the application configuration file,
+ |             otherwise it creates one.
+ |      
+ |      :return:
+ |          :class:`~kivy.config.ConfigParser` instance
+ |  
+ |  load_kv(self, filename=None)
+ |      This method is invoked the first time the app is being run if no
+ |      widget tree has been constructed before for this app.
+ |      This method then looks for a matching kv file in the same directory as
+ |      the file that contains the application class.
+ |      
+ |      For example, say you have a file named main.py that contains::
+ |      
+ |          class ShowcaseApp(App):
+ |              pass
+ |      
+ |      This method will search for a file named `showcase.kv` in
+ |      the directory that contains main.py. The name of the kv file has to be
+ |      the lowercase name of the class, without the 'App' postfix at the end
+ |      if it exists.
+ |      
+ |      You can define rules and a root widget in your kv file::
+ |      
+ |          <ClassName>: # this is a rule
+ |              ...
+ |      
+ |          ClassName: # this is a root widget
+ |              ...
+ |      
+ |      There must be only one root widget. See the :doc:`api-kivy.lang`
+ |      documentation for more information on how to create kv files. If your
+ |      kv file contains a root widget, it will be used as self.root, the root
+ |      widget for the application.
+ |      
+ |      .. note::
+ |      
+ |          This function is called from :meth:`run`, therefore, any widget
+ |          whose styling is defined in this kv file and is created before
+ |          :meth:`run` is called (e.g. in `__init__`), won't have its styling
+ |          applied. Note that :meth:`build` is called after :attr:`load_kv`
+ |          has been called.
+ |  
+ |  on_config_change(self, config, section, key, value)
+ |      Event handler fired when a configuration token has been changed by
+ |      the settings page.
+ |      
+ |      .. versionchanged:: 1.10.1
+ |         Added corresponding ``on_config_change`` event.
+ |  
+ |  on_icon(self, instance, icon)
+ |  
+ |  on_pause(self)
+ |      Event handler called when Pause mode is requested. You should
+ |      return True if your app can go into Pause mode, otherwise
+ |      return False and your application will be stopped.
+ |      
+ |      You cannot control when the application is going to go into this mode.
+ |      It's determined by the Operating System and mostly used for mobile
+ |      devices (android/ios) and for resizing.
+ |      
+ |      The default return value is True.
+ |      
+ |      .. versionadded:: 1.1.0
+ |      .. versionchanged:: 1.10.0
+ |          The default return value is now True.
+ |  
+ |  on_resume(self)
+ |      Event handler called when your application is resuming from
+ |      the Pause mode.
+ |      
+ |      .. versionadded:: 1.1.0
+ |      
+ |      .. warning::
+ |      
+ |          When resuming, the OpenGL Context might have been damaged / freed.
+ |          This is where you can reconstruct some of your OpenGL state
+ |          e.g. FBO content.
+ |  
+ |  on_start(self)
+ |      Event handler for the `on_start` event which is fired after
+ |      initialization (after build() has been called) but before the
+ |      application has started running.
+ |  
+ |  on_stop(self)
+ |      Event handler for the `on_stop` event which is fired when the
+ |      application has finished running (i.e. the window is about to be
+ |      closed).
+ |  
+ |  on_title(self, instance, title)
+ |  
+ |  open_settings(self, *largs)
+ |      Open the application settings panel. It will be created the very
+ |      first time, or recreated if the previously cached panel has been
+ |      removed by :meth:`destroy_settings`. The settings panel will be
+ |      displayed with the
+ |      :meth:`display_settings` method, which by default adds the
+ |      settings panel to the Window attached to your application. You
+ |      should override that method if you want to display the
+ |      settings panel differently.
+ |      
+ |      :return:
+ |          True if the settings has been opened.
+ |  
+ |  run(self)
+ |      Launches the app in standalone mode.
+ |  
+ |  stop(self, *largs)
+ |      Stop the application.
+ |      
+ |      If you use this method, the whole application will stop by issuing
+ |      a call to :func:`~kivy.base.stopTouchApp`.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |  
+ |  get_running_app()
+ |      Return the currently running application instance.
+ |      
+ |      .. versionadded:: 1.1.0
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  directory
+ |      .. versionadded:: 1.0.7
+ |      
+ |      Return the directory where the application lives.
+ |  
+ |  icon
+ |      StringProperty(defaultvalue='', **kw)
+ |      Property that represents a string value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: string, defaults to ''
+ |                  Specifies the default value of the property.
+ |  
+ |  kv_directory
+ |      StringProperty(defaultvalue='', **kw)
+ |      Property that represents a string value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: string, defaults to ''
+ |                  Specifies the default value of the property.
+ |  
+ |  kv_file
+ |      StringProperty(defaultvalue='', **kw)
+ |      Property that represents a string value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: string, defaults to ''
+ |                  Specifies the default value of the property.
+ |  
+ |  name
+ |      .. versionadded:: 1.0.7
+ |      
+ |      Return the name of the application based on the class name.
+ |  
+ |  root_window
+ |      .. versionadded:: 1.9.0
+ |      
+ |      Returns the root window instance used by :meth:`run`.
+ |  
+ |  settings_cls
+ |      ObjectProperty(defaultvalue=None, rebind=False, **kw)
+ |      Property that represents a Python object.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: object type
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  Whether kv rules using this object as an intermediate attribute
+ |                  in a kv rule, will update the bound property when this object
+ |                  changes.
+ |      
+ |                  That is the standard behavior is that if there's a kv rule
+ |                  ``text: self.a.b.c.d``, where ``a``, ``b``, and ``c`` are
+ |                  properties with ``rebind`` ``False`` and ``d`` is a
+ |                  :class:`StringProperty`. Then when the rule is applied, ``text``
+ |                  becomes bound only to ``d``. If ``a``, ``b``, or ``c`` change,
+ |                  ``text`` still remains bound to ``d``. Furthermore, if any of them
+ |                  were ``None`` when the rule was initially evaluated, e.g. ``b`` was
+ |                  ``None``; then ``text`` is bound to ``b`` and will not become bound
+ |                  to ``d`` even when ``b`` is changed to not be ``None``.
+ |      
+ |                  By setting ``rebind`` to ``True``, however, the rule will be
+ |                  re-evaluated and all the properties rebound when that intermediate
+ |                  property changes. E.g. in the example above, whenever ``b`` changes
+ |                  or becomes not ``None`` if it was ``None`` before, ``text`` is
+ |                  evaluated again and becomes rebound to ``d``. The overall result is
+ |                  that ``text`` is now bound to all the properties among ``a``,
+ |                  ``b``, or ``c`` that have ``rebind`` set to ``True``.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  `baseclass`
+ |                      If kwargs includes a `baseclass` argument, this value will be
+ |                      used for validation: `isinstance(value, kwargs['baseclass'])`.
+ |      
+ |          .. warning::
+ |      
+ |              To mark the property as changed, you must reassign a new python object.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.7.0
+ |      
+ |              `baseclass` parameter added.
+ |  
+ |  title
+ |      StringProperty(defaultvalue='', **kw)
+ |      Property that represents a string value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: string, defaults to ''
+ |                  Specifies the default value of the property.
+ |  
+ |  user_data_dir
+ |      .. versionadded:: 1.7.0
+ |      
+ |      Returns the path to the directory in the users file system which the
+ |      application can use to store additional data.
+ |      
+ |      Different platforms have different conventions with regards to where
+ |      the user can store data such as preferences, saved games and settings.
+ |      This function implements these conventions. The <app_name> directory
+ |      is created when the property is called, unless it already exists.
+ |      
+ |      On iOS, `~/Documents/<app_name>` is returned (which is inside the
+ |      app's sandbox).
+ |      
+ |      On Windows, `%APPDATA%/<app_name>` is returned.
+ |      
+ |      On OS X, `~/Library/Application Support/<app_name>` is returned.
+ |      
+ |      On Linux, `$XDG_CONFIG_HOME/<app_name>` is returned.
+ |      
+ |      On Android, `Context.GetFilesDir
+ |      <https://developer.android.com/reference/android/content/Context.html#getFilesDir()>`_ is returned.
+ |      
+ |      .. versionchanged:: 1.11.0
+ |      
+ |          On Android, this function previously returned
+ |          `/sdcard/<app_name>`. This folder became read-only by default
+ |          in Android API 26 and the user_data_dir has therefore been moved
+ |          to a writeable location.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __events__ = ('on_start', 'on_stop', 'on_pause', 'on_resume', 'on_conf...
+ |  
+ |  use_kivy_settings = True
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from kivy._event.EventDispatcher:
+ |  
+ |  __reduce__ = __reduce_cython__(...)
+ |      EventDispatcher.__reduce_cython__(self)
+ |  
+ |  __setstate__ = __setstate_cython__(...)
+ |      EventDispatcher.__setstate_cython__(self, __pyx_state)
+ |  
+ |  apply_property(...)
+ |      EventDispatcher.apply_property(self, **kwargs)
+ |      Adds properties at runtime to the class. The function accepts
+ |              keyword arguments of the form `prop_name=prop`, where `prop` is a
+ |              :class:`Property` instance and `prop_name` is the name of the attribute
+ |              of the property.
+ |      
+ |              .. versionadded:: 1.9.1
+ |      
+ |              .. warning::
+ |      
+ |                  This method is not recommended for common usage because you should
+ |                  declare the properties in your class instead of using this method.
+ |      
+ |              For example::
+ |      
+ |                  >>> print(wid.property('sticks', quiet=True))
+ |                  None
+ |                  >>> wid.apply_property(sticks=ObjectProperty(55, max=10))
+ |                  >>> print(wid.property('sticks', quiet=True))
+ |                  <kivy.properties.ObjectProperty object at 0x04303130>
+ |  
+ |  bind(...)
+ |      EventDispatcher.bind(self, **kwargs)
+ |      Bind an event type or a property to a callback.
+ |      
+ |              Usage::
+ |      
+ |                  # With properties
+ |                  def my_x_callback(obj, value):
+ |                      print('on object', obj, 'x changed to', value)
+ |                  def my_width_callback(obj, value):
+ |                      print('on object', obj, 'width changed to', value)
+ |                  self.bind(x=my_x_callback, width=my_width_callback)
+ |      
+ |                  # With event
+ |                  def my_press_callback(obj):
+ |                      print('event on object', obj)
+ |                  self.bind(on_press=my_press_callback)
+ |      
+ |              In general, property callbacks are called with 2 arguments (the
+ |              object and the property's new value) and event callbacks with
+ |              one argument (the object). The example above illustrates this.
+ |      
+ |              The following example demonstrates various ways of using the bind
+ |              function in a complete application::
+ |      
+ |                  from kivy.uix.boxlayout import BoxLayout
+ |                  from kivy.app import App
+ |                  from kivy.uix.button import Button
+ |                  from functools import partial
+ |      
+ |      
+ |                  class DemoBox(BoxLayout):
+ |                      """
+ |                      This class demonstrates various techniques that can be used for binding to
+ |                      events. Although parts could me made more optimal, advanced Python concepts
+ |                      are avoided for the sake of readability and clarity.
+ |                      """
+ |                      def __init__(self, **kwargs):
+ |                          super(DemoBox, self).__init__(**kwargs)
+ |                          self.orientation = "vertical"
+ |      
+ |                          # We start with binding to a normal event. The only argument
+ |                          # passed to the callback is the object which we have bound to.
+ |                          btn = Button(text="Normal binding to event")
+ |                          btn.bind(on_press=self.on_event)
+ |      
+ |                          # Next, we bind to a standard property change event. This typically
+ |                          # passes 2 arguments: the object and the value
+ |                          btn2 = Button(text="Normal binding to a property change")
+ |                          btn2.bind(state=self.on_property)
+ |      
+ |                          # Here we use anonymous functions (a.k.a lambdas) to perform binding.
+ |                          # Their advantage is that you can avoid declaring new functions i.e.
+ |                          # they offer a concise way to "redirect" callbacks.
+ |                          btn3 = Button(text="Using anonymous functions.")
+ |                          btn3.bind(on_press=lambda x: self.on_event(None))
+ |      
+ |                          # You can also declare a function that accepts a variable number of
+ |                          # positional and keyword arguments and use introspection to determine
+ |                          # what is being passed in. This is very handy for debugging as well
+ |                          # as function re-use. Here, we use standard event binding to a function
+ |                          # that accepts optional positional and keyword arguments.
+ |                          btn4 = Button(text="Use a flexible function")
+ |                          btn4.bind(on_press=self.on_anything)
+ |      
+ |                          # Lastly, we show how to use partial functions. They are sometimes
+ |                          # difficult to grasp, but provide a very flexible and powerful way to
+ |                          # reuse functions.
+ |                          btn5 = Button(text="Using partial functions. For hardcores.")
+ |                          btn5.bind(on_press=partial(self.on_anything, "1", "2", monthy="python"))
+ |      
+ |                          for but in [btn, btn2, btn3, btn4, btn5]:
+ |                              self.add_widget(but)
+ |      
+ |                      def on_event(self, obj):
+ |                          print("Typical event from", obj)
+ |      
+ |                      def on_property(self, obj, value):
+ |                          print("Typical property change from", obj, "to", value)
+ |      
+ |                      def on_anything(self, *args, **kwargs):
+ |                          print('The flexible function has *args of', str(args),
+ |                              "and **kwargs of", str(kwargs))
+ |      
+ |      
+ |                  class DemoApp(App):
+ |                      def build(self):
+ |                          return DemoBox()
+ |      
+ |                  if __name__ == "__main__":
+ |                      DemoApp().run()
+ |      
+ |              When binding a function to an event or property, a
+ |              :class:`kivy.weakmethod.WeakMethod` of the callback is saved, and
+ |              when dispatching the callback is removed if the callback reference
+ |              becomes invalid.
+ |      
+ |              If a callback has already been bound to a given event or property,
+ |              it won't be added again.
+ |  
+ |  create_property(...)
+ |      EventDispatcher.create_property(self, str name, value=None, *largs, **kwargs)
+ |      Create a new property at runtime.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              .. versionchanged:: 1.8.0
+ |                  `value` parameter added, can be used to set the default value of the
+ |                  property. Also, the type of the value is used to specialize the
+ |                  created property.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  In the past, if `value` was of type `bool`, a `NumericProperty`
+ |                  would be created, now a `BooleanProperty` is created.
+ |      
+ |                  Also, now and positional and keyword arguments are passed to the
+ |                  property when created.
+ |      
+ |              .. warning::
+ |      
+ |                  This function is designed for the Kivy language, don't use it in
+ |                  your code. You should declare the property in your class instead of
+ |                  using this method.
+ |      
+ |              :Parameters:
+ |                  `name`: string
+ |                      Name of the property
+ |                  `value`: object, optional
+ |                      Default value of the property. Type is also used for creating
+ |                      more appropriate property types. Defaults to None.
+ |      
+ |      
+ |              ::
+ |      
+ |                  >>> mywidget = Widget()
+ |                  >>> mywidget.create_property('custom')
+ |                  >>> mywidget.custom = True
+ |                  >>> print(mywidget.custom)
+ |                  True
+ |  
+ |  dispatch(...)
+ |      EventDispatcher.dispatch(self, basestring event_type, *largs, **kwargs)
+ |      Dispatch an event across all the handlers added in bind/fbind().
+ |              As soon as a handler returns True, the dispatching stops.
+ |      
+ |              The function collects all the positional and keyword arguments and
+ |              passes them on to the handlers.
+ |      
+ |              .. note::
+ |                  The handlers are called in reverse order than they were registered
+ |                  with :meth:`bind`.
+ |      
+ |              :Parameters:
+ |                  `event_type`: basestring
+ |                      the event name to dispatch.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  Keyword arguments collection and forwarding was added. Before, only
+ |                  positional arguments would be collected and forwarded.
+ |  
+ |  dispatch_children(...)
+ |      EventDispatcher.dispatch_children(self, basestring event_type, *largs, **kwargs)
+ |  
+ |  dispatch_generic(...)
+ |      EventDispatcher.dispatch_generic(self, basestring event_type, *largs, **kwargs)
+ |  
+ |  events(...)
+ |      EventDispatcher.events(self)
+ |      Return all the events in the class. Can be used for introspection.
+ |      
+ |              .. versionadded:: 1.8.0
+ |  
+ |  fbind(...)
+ |      EventDispatcher.fbind(self, name, func, *largs, **kwargs)
+ |      A method for advanced, and typically faster binding. This method is
+ |              different than :meth:`bind` and is meant for more advanced users and
+ |              internal usage. It can be used as long as the following points are heeded.
+ |      
+ |              #. As opposed to :meth:`bind`, it does not check that this function and
+ |                 largs/kwargs has not been bound before to this name. So binding
+ |                 the same callback multiple times will just keep adding it.
+ |              #. Although :meth:`bind` creates a :class:`WeakMethod` of the callback when
+ |                 binding to an event or property, this method stores the callback
+ |                 directly, unless a keyword argument `ref` with value True is provided
+ |                 and then a :class:`WeakMethod` is saved.
+ |                 This is useful when there's no risk of a memory leak by storing the
+ |                 callback directly.
+ |              #. This method returns a unique positive number if `name` was found and
+ |                 bound, and `0`, otherwise. It does not raise an exception, like
+ |                 :meth:`bind` if the property `name` is not found. If not zero,
+ |                 the uid returned is unique to this `name` and callback and can be
+ |                 used with :meth:`unbind_uid` for unbinding.
+ |      
+ |      
+ |              When binding a callback with largs and/or kwargs, :meth:`funbind`
+ |              must be used for unbinding. If no largs and kwargs are provided,
+ |              :meth:`unbind` may be used as well. :meth:`unbind_uid` can be used in
+ |              either case.
+ |      
+ |              This method passes on any caught positional and/or keyword arguments to
+ |              the callback, removing the need to call partial. When calling the
+ |              callback the expended largs are passed on followed by instance/value
+ |              (just instance for kwargs) followed by expended kwargs.
+ |      
+ |              Following is an example of usage similar to the example in
+ |              :meth:`bind`::
+ |      
+ |                  class DemoBox(BoxLayout):
+ |      
+ |                      def __init__(self, **kwargs):
+ |                          super(DemoBox, self).__init__(**kwargs)
+ |                          self.orientation = "vertical"
+ |      
+ |                          btn = Button(text="Normal binding to event")
+ |                          btn.fbind('on_press', self.on_event)
+ |      
+ |                          btn2 = Button(text="Normal binding to a property change")
+ |                          btn2.fbind('state', self.on_property)
+ |      
+ |                          btn3 = Button(text="A: Using function with args.")
+ |                          btn3.fbind('on_press', self.on_event_with_args, 'right',
+ |                                         tree='birch', food='apple')
+ |      
+ |                          btn4 = Button(text="Unbind A.")
+ |                          btn4.fbind('on_press', self.unbind_a, btn3)
+ |      
+ |                          btn5 = Button(text="Use a flexible function")
+ |                          btn5.fbind('on_press', self.on_anything)
+ |      
+ |                          btn6 = Button(text="B: Using flexible functions with args. For hardcores.")
+ |                          btn6.fbind('on_press', self.on_anything, "1", "2", monthy="python")
+ |      
+ |                          btn7 = Button(text="Force dispatch B with different params")
+ |                          btn7.fbind('on_press', btn6.dispatch, 'on_press', 6, 7, monthy="other python")
+ |      
+ |                          for but in [btn, btn2, btn3, btn4, btn5, btn6, btn7]:
+ |                              self.add_widget(but)
+ |      
+ |                      def on_event(self, obj):
+ |                          print("Typical event from", obj)
+ |      
+ |                      def on_event_with_args(self, side, obj, tree=None, food=None):
+ |                          print("Event with args", obj, side, tree, food)
+ |      
+ |                      def on_property(self, obj, value):
+ |                          print("Typical property change from", obj, "to", value)
+ |      
+ |                      def on_anything(self, *args, **kwargs):
+ |                          print('The flexible function has *args of', str(args),
+ |                              "and **kwargs of", str(kwargs))
+ |                          return True
+ |      
+ |                      def unbind_a(self, btn, event):
+ |                          btn.funbind('on_press', self.on_event_with_args, 'right',
+ |                                          tree='birch', food='apple')
+ |      
+ |              .. note::
+ |      
+ |                  Since the kv lang uses this method to bind, one has to implement
+ |                  this method, instead of :meth:`bind` when creating a non
+ |                  :class:`EventDispatcher` based class used with the kv lang. See
+ |                  :class:`Observable` for an example.
+ |      
+ |              .. versionadded:: 1.9.0
+ |      
+ |              .. versionchanged:: 1.9.1
+ |                  The `ref` keyword argument has been added.
+ |  
+ |  funbind(...)
+ |      EventDispatcher.funbind(self, name, func, *largs, **kwargs)
+ |      Similar to :meth:`fbind`.
+ |      
+ |              When unbinding, :meth:`unbind` will unbind all callbacks that match the
+ |              callback, while this method will only unbind the first.
+ |      
+ |              To unbind, the same positional and keyword arguments passed to
+ |              :meth:`fbind` must be passed on to funbind.
+ |      
+ |              .. note::
+ |      
+ |                  It is safe to use :meth:`funbind` to unbind a function bound with
+ |                  :meth:`bind` as long as no keyword and positional arguments are
+ |                  provided to :meth:`funbind`.
+ |      
+ |              .. versionadded:: 1.9.0
+ |  
+ |  get_property_observers(...)
+ |      EventDispatcher.get_property_observers(self, name, args=False)
+ |      Returns a list of methods that are bound to the property/event
+ |             passed as the *name* argument::
+ |      
+ |                 widget_instance.get_property_observers('on_release')
+ |      
+ |             :Parameters:
+ |      
+ |                 `name`: str
+ |                     The name of the event or property.
+ |                 `args`: bool
+ |                     Whether to return the bound args. To keep compatibility,
+ |                     only the callback functions and not their provided args will
+ |                     be returned in the list when `args` is False.
+ |      
+ |                     If True, each element in the list is a 5-tuple of
+ |                     `(callback, largs, kwargs, is_ref, uid)`, where `is_ref` indicates
+ |                     whether `callback` is a weakref, and `uid` is the uid given by
+ |                     :meth:`fbind`, or None if :meth:`bind` was used. Defaults to `False`.
+ |      
+ |             :Returns:
+ |                 The list of bound callbacks. See `args` for details.
+ |      
+ |             .. versionadded:: 1.8.0
+ |      
+ |             .. versionchanged:: 1.9.0
+ |                 `args` has been added.
+ |  
+ |  getter(...)
+ |      EventDispatcher.getter(self, name)
+ |      Return the getter of a property.
+ |      
+ |              .. versionadded:: 1.0.9
+ |  
+ |  is_event_type(...)
+ |      EventDispatcher.is_event_type(self, basestring event_type)
+ |      Return True if the event_type is already registered.
+ |      
+ |              .. versionadded:: 1.0.4
+ |  
+ |  properties(...)
+ |      EventDispatcher.properties(self) -> dict
+ |      Return all the properties in the class in a dictionary of
+ |              key/property class. Can be used for introspection.
+ |      
+ |              .. versionadded:: 1.0.9
+ |  
+ |  property(...)
+ |      EventDispatcher.property(self, name, quiet=False)
+ |      Get a property instance from the property name. If quiet is True,
+ |              None is returned instead of raising an exception when `name` is not a
+ |              property. Defaults to `False`.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              :return:
+ |      
+ |                  A :class:`~kivy.properties.Property` derived instance
+ |                  corresponding to the name.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  quiet was added.
+ |  
+ |  register_event_type(...)
+ |      EventDispatcher.register_event_type(self, basestring event_type)
+ |      Register an event type with the dispatcher.
+ |      
+ |              Registering event types allows the dispatcher to validate event handler
+ |              names as they are attached and to search attached objects for suitable
+ |              handlers. Each event type declaration must:
+ |      
+ |                  1. start with the prefix `on_`.
+ |                  2. have a default handler in the class.
+ |      
+ |              Example of creating a custom event::
+ |      
+ |                  class MyWidget(Widget):
+ |                      def __init__(self, **kwargs):
+ |                          super(MyWidget, self).__init__(**kwargs)
+ |                          self.register_event_type('on_swipe')
+ |      
+ |                      def on_swipe(self):
+ |                          pass
+ |      
+ |                  def on_swipe_callback(*largs):
+ |                      print('my swipe is called', largs)
+ |                  w = MyWidget()
+ |                  w.dispatch('on_swipe')
+ |  
+ |  setter(...)
+ |      EventDispatcher.setter(self, name)
+ |      Return the setter of a property. Use: instance.setter('name').
+ |              The setter is a convenient callback function useful if you want
+ |              to directly bind one property to another.
+ |              It returns a partial function that will accept
+ |              (obj, value) args and results in the property 'name' of instance
+ |              being set to value.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              For example, to bind number2 to number1 in python you would do::
+ |      
+ |                  class ExampleWidget(Widget):
+ |                      number1 = NumericProperty(None)
+ |                      number2 = NumericProperty(None)
+ |      
+ |                      def __init__(self, **kwargs):
+ |                          super(ExampleWidget, self).__init__(**kwargs)
+ |                          self.bind(number1=self.setter('number2'))
+ |      
+ |              This is equivalent to kv binding::
+ |      
+ |                  <ExampleWidget>:
+ |                      number2: self.number1
+ |  
+ |  unbind(...)
+ |      EventDispatcher.unbind(self, **kwargs)
+ |      Unbind properties from callback functions with similar usage as
+ |              :meth:`bind`.
+ |      
+ |              If a callback has been bound to a given event or property multiple
+ |              times, only the first occurrence will be unbound.
+ |      
+ |              .. note::
+ |      
+ |                  It is safe to use :meth:`unbind` on a function bound with :meth:`fbind`
+ |                  as long as that function was originally bound without any keyword and
+ |                  positional arguments. Otherwise, the function will fail to be unbound
+ |                  and you should use :meth:`funbind` instead.
+ |  
+ |  unbind_uid(...)
+ |      EventDispatcher.unbind_uid(self, name, uid)
+ |      Uses the uid returned by :meth:`fbind` to unbind the callback.
+ |      
+ |              This method is much more efficient than :meth:`funbind`. If `uid`
+ |              evaluates to False (e.g. 0) a `ValueError` is raised. Also, only
+ |              callbacks bound with :meth:`fbind` can be unbound with this method.
+ |      
+ |              Since each call to :meth:`fbind` will generate a unique `uid`,
+ |              only one callback will be removed. If `uid` is not found among the
+ |              callbacks, no error is raised.
+ |      
+ |              E.g.::
+ |      
+ |                  btn6 = Button(text="B: Using flexible functions with args. For hardcores.")
+ |                  uid = btn6.fbind('on_press', self.on_anything, "1", "2", monthy="python")
+ |                  if not uid:
+ |                      raise Exception('Binding failed').
+ |                  ...
+ |                  btn6.unbind_uid('on_press', uid)
+ |      
+ |              .. versionadded:: 1.9.0
+ |  
+ |  unregister_event_types(...)
+ |      EventDispatcher.unregister_event_types(self, basestring event_type)
+ |      Unregister an event type in the dispatcher.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from kivy._event.EventDispatcher:
+ |  
+ |  __new__(*args, **kwargs) from builtins.type
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from kivy._event.EventDispatcher:
+ |  
+ |  proxy_ref
+ |      Default implementation of proxy_ref, returns self.
+ |      .. versionadded:: 1.9.0
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from kivy._event.EventDispatcher:
+ |  
+ |  __pyx_vtable__ = <capsule object NULL>
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from kivy._event.ObjectWithUid:
+ |  
+ |  uid

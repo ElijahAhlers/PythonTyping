@@ -1,0 +1,33 @@
+    def averageResults(self):
+        if not self.doneWithAllLessons:
+            accuracies = [int(x) for a,x,b in self.files]
+            wpms = [int(x) for a,b,x in self.files]
+        else:
+            best4 = bestOfFiles(self.files)
+            accuracies = [int(x) for a,x,b in best4]
+            wpms = [int(x) for a,b,x in best4]
+        self.averageAccuracy,self.averageWPM = sum(accuracies)/len(accuracies),sum(wpms)/len(wpms)
+
+    def recordFinalResults(self):
+        print('gotHere')
+        print(self.lessonName,self.averageAccuracy,self.averageWPM)
+        ce.writeToCSVFile('X:/Advanced Python/2019Typing/UserData/'+self.user.username+'/history.csv',[{'Lesson':self.lessonName,
+                                                                                                        'Accuracy':self.averageAccuracy,
+                                                                                                        'WPM':self.averageWPM}])
+                               
+    def recordLessonResults(self):
+        filepath = '/'.join(sys.path[0].split('\\')[:-1])+'/UserData/'+self.user.username+'/history'
+        isfilethere = listdir(filepath)
+        for file in isfilethere:
+            if str(datetime.datetime.today())[:10] == file[:10]:
+                ce.writeToCSVFile(filepath+'/'+file+'.csv',[{'Lesson':self.files[len(self.files)-1][0],
+                                                          'Accuracy':self.files[len(self.files)-1][1],
+                                                          'WPM':self.files[len(self.files)-1][2],
+                                                          'IdleTime':self.idleTime}])
+            else:
+                ce.writeNewCSVFile(filepath+'/'+str(datetime.datetime.today())[:10]+self.lessonName,
+                                   ['Lesson','Accuracy','WPM','IdleTime'],
+                                   [{'Lesson':self.files[len(self.files)-1][0],
+                                    'Accuracy':self.files[len(self.files)-1][1],
+                                    'WPM':self.files[len(self.files)-1][2],
+                                    'IdleTime':self.idleTime}])

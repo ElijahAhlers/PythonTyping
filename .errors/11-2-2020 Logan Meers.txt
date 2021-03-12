@@ -1,0 +1,252 @@
+[INFO   ] [Logger      ] Record log in C:\Users\loganmeers\.kivy\logs\kivy_20-11-02_0.txt
+[INFO   ] [deps        ] Successfully imported "kivy_deps.angle" 0.1.9
+[INFO   ] [deps        ] Successfully imported "kivy_deps.glew" 0.1.12
+[INFO   ] [deps        ] Successfully imported "kivy_deps.sdl2" 0.1.22
+[INFO   ] [Kivy        ] v1.11.1
+[INFO   ] [Kivy        ] Installed at "C:\Program Files (x86)\Python37-32\lib\site-packages\kivy\__init__.py"
+[INFO   ] [Python      ] v3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 19:29:22) [MSC v.1916 32 bit (Intel)]
+[INFO   ] [Python      ] Interpreter at "C:\Program Files (x86)\Python37-32\python.exe"
+[INFO   ] [Factory     ] 184 symbols loaded
+[INFO   ] [Image       ] Providers: img_tex, img_dds, img_sdl2, img_pil, img_gif (img_ffpyplayer ignored)
+[INFO   ] [Window      ] Provider: sdl2
+[INFO   ] [GL          ] Using the "OpenGL" graphics system
+[INFO   ] [GL          ] GLEW initialization succeeded
+[INFO   ] [GL          ] Backend used <glew>
+[INFO   ] [GL          ] OpenGL version <b'4.6.0 - Build 27.20.100.8681'>
+[INFO   ] [GL          ] OpenGL vendor <b'Intel'>
+[INFO   ] [GL          ] OpenGL renderer <b'Intel(R) UHD Graphics 630'>
+[INFO   ] [GL          ] OpenGL parsed version: 4, 6
+[INFO   ] [GL          ] Shading version <b'4.60 - Build 27.20.100.8681'>
+[INFO   ] [GL          ] Texture max size <16384>
+[INFO   ] [GL          ] Texture max units <32>
+[INFO   ] [Window      ] auto add sdl2 input provider
+[INFO   ] [Window      ] virtual keyboard not allowed, single mode, not docked
+[INFO   ] [Text        ] Provider: sdl2
+[INFO   ] [GL          ] NPOT texture support is available
+[INFO   ] [Base        ] Start application main loop
+[INFO   ] [Loader      ] using a thread pool of 2 workers
+The manager's "done with lessons" tag returned False
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047B0AB0> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047BB490> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047D2F80> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047D9500> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047E4F10> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x047ED960> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x01841490> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x01321AE8> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10A2DF48> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x0EA71C70> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x0EA846F8> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10DFE570> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10E12110> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x116F5C00> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x116FE180> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x014CB768> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x014CB0A0> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x013459D0> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x0E8A1F48> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x0475A068> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x01692F48> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x04739C38> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x017671F0> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x01752C38> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x014BAF48> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x014C0228> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10B27D88> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10B18F10> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x117EF068> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x117EA8F0> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10CADD18> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10CA8298> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10CB0CA8> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x10CD76F8> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x014BAAE8> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x016A6378> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x016ACA08> have no cols or rows set, layout is not triggered.
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+It got stuck in the setupScreen function
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x046E5308> have no cols or rows set, layout is not triggered.
+[WARNING] <kivy.uix.gridlayout.GridLayout object at 0x046EA4C8> have no cols or rows set, layout is not triggered.
+The manager's "done with lessons" tag returned False
+Key.cmd

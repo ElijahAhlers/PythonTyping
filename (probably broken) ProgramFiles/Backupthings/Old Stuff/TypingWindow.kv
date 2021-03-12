@@ -1,0 +1,149 @@
+# Filename: TypingAppMaster.kv
+			
+<TypingWindow>:
+	cols:1
+
+	GridLayout:
+		cols:3
+		size: root.width, root.height
+		
+		Image:
+			source: 'Images/CalvaryBBack2.jpg'
+		
+		GridLayout:
+			padding: [0,root.height*0.04629,0,0]
+			size_hint_x: root.width*0.006
+			cols:2
+			size: root.width * 0.6, root.height * 0.2
+			
+			Label:
+				font_size: int(root.width*root.height*0.00004)
+				text: 'Login Details'
+			
+			Label:
+				text: ''
+				
+			GridLayout:
+				padding: [root.width*0.14625,root.height*0.06418,0,root.width*0.01851]
+				cols: 4
+				
+				Label:
+					text: 'Accuracy'
+					font_size: int(root.width*root.height*0.00001)
+				
+				Label:
+					text: 'Raw WPM'
+					font_size: int(root.width*root.height*0.00001)
+					
+				Label:
+					text: 'Real WPM'
+					font_size: int(root.width*root.height*0.00001)
+					
+				Label:
+					text: 'Time'
+					font_size: int(root.width*root.height*0.00001)
+					
+				Label:
+					text: '100%'
+					font_size: int(root.width*root.height*0.000013)
+					id: accuracy
+				
+				Label:
+					text: '0'
+					font_size: int(root.width*root.height*0.000013)
+					id: rawWPM
+					
+				Label:
+					text: '0'
+					font_size: int(root.width*root.height*0.000013)
+					id: realWPM
+				
+				Label:
+					text: '0:00'
+					font_size: int(root.width*root.height*0.000013)
+					id: time
+					
+			GridLayout:
+				cols: 2
+				padding: [0,root.height*0.06418,root.width*0.15625,root.width*0.01851]
+				
+				Label:
+					text: 'File:'
+					font_size: int(root.width*root.height*0.00001)
+					
+				Label:
+					text: 'Number:'
+					font_size: int(root.width*root.height*0.00001)
+					
+				Label:
+					text: 'Bible Verses Advanced - With Backspaces'
+					font_size: int(root.width*root.height*0.000011)
+					id: filename
+				
+				Label:
+					text: '1 out of 2'
+					font_size: int(root.width*root.height*0.000011)
+					id: number
+		
+		GridLayout:
+			cols: 2
+			
+			Label:
+				text: ''
+			
+			GridLayout:
+				cols:1
+				padding: [10,10,10,140]
+				Button:
+					text: 'Exit'
+					font_size: int(root.width*root.height*0.000008)
+					on_press: root.exit()
+			
+			Label:
+				text: ''
+		
+		Label:
+			text: ''
+			
+		GridLayout:
+			cols: 1
+			
+			Label:
+				font_name: 'KivyGraphicFiles/Fonts/UbuntuMono-R'
+				text: 'Type This'
+				id: givenText
+				
+			Label:
+				font_name: 'KivyGraphicFiles/Fonts/UbuntuMono-R'
+				text: 'Typing This'
+				id: typedText
+		
+		GridLayout:
+			cols: 2
+			
+			Label:
+				text: ''
+			
+			Label:
+				text: 'OtherIdleTime'
+				
+			Label:
+				text: 'Idle Time: '
+			
+			Label:
+				text: '0:00'
+				id: totalIdleTime
+			
+			Label:
+				text: '0:00'
+				id: fileIdleTime
+				
+		Label:
+			text: ''
+		
+		Label:
+			text: 'bottom Label'
+	
+
+			
+					

@@ -1,0 +1,68 @@
+    def makeKeyString(self):
+        if len(self.onScreenText) > self.lettersOnScreen:
+            self.onScreenText = self.onScreenText[1:]
+            return [self.onScreenText, self.currentCursor+'*'*(self.spacesOnScreen-1)]
+        else:
+            return [self.onScreenText, self.currentCursor+'*'*(self.numOfLettersShownOnTheScreen-len(self.onScreenText)-1)]
+
+
+    def makeLetterDisplayString(self):
+        if self.lettersTyped > self.lettersOnScreen:
+            screentext = self.wordsToType[self.lettersTyped-self.lettersOnScreen:len(self.wordsToType)-(self.lettersTyped-self.lettersOnScreen)]
+            return screentext.join('') + '*'*(self.numOfLettersShownOnTheScreen-len(screentext))
+        else:
+            return self.wordsToType[:self.numOfLettersShownOnTheScreen].join('')+'*'*(self.numOfLettersShownOnTheScreen-len(self.wordsToType[:self.numOfLettersShownOnTheScreen]))
+            
+
+    def KeyPressMaster(self,key):
+        self.idleTimeCache = perf.perf_counter()
+        if key == 'bspace' and self.bSpace and self.typedText:
+            self.lettersTyped-=1
+            self.lettersRight = self.lettersRight[:-1]
+            self.typedText = self.typedText[:-1]
+            self.onScreenText = self.onScreenText[:-1]
+            if len(self.typedText) > len(self.onScreenText):
+                self.onScreenText = self.typedText[-len(self.onScreenText)-1] + self.onScreenText
+        elif self.forced100:
+            if self.typedText[-1] == self.wordsToType[self.lettersTyped-1]:
+                self.lettersTyped+=1
+                self.typedText+=key
+                self.onScreenText+=key
+                try:
+                    self.lettersRight.append(0)
+                except:
+                    Exit()
+            
+                
+        else:
+            self.lettersTyped+=1
+            self.typedText+=key
+            self.onScreenText+=key
+            try:
+                self.lettersRight.append(0 if self.typedText[-1] == self.wordsToType[self.lettersTyped-1] else 1)
+            except:
+                self.Exit()
+        self.ids.typedText.text = self.formatLetters(self.makeKeyString(),self.lettersRight[self.lettersTyped-self.lettersOnScreen:] if len(self.lettersRight)>self.lettersOnScreen else self.lettersRight)
+        self.ids.givenText.text = self.makeLetterDisplayString()
+        self.calculatePercent()
+        self.ids.percentcomplete.text = self.addZeroesToPercent(self.percentComplete)
+        self.ids.percentprogress.value = int(self.percentComplete)
+        if self.lettersTyped == len(self.wordsToType):
+            self.Exit()
+
+    def formatLetters(self,letters,listOfColors):
+        returnstr = []
+        for letter,color in map(lambda a,b:[a,b],letters[0],listOfColors):
+            if letter == ' ':
+                returnstr+=[' ']
+            elif letter == '|':
+                returnstr+=['|']
+            elif letter == '"':
+                returnstr+=['[color='+self.colors[color]+']\\"[/color]']
+            elif letter == '[':
+                returnstr+=['[color='+self.colors[color]+']&br;[/color]']
+            elif letter == ']':
+                returnstr+=['[color='+self.colors[color]+']&bl;[/color]']
+            else:
+                returnstr+=['[color='+self.colors[color]+']'+letter+'[/color]']
+        return ''.join(returnstr)+letters[1]

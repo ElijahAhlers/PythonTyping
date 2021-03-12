@@ -1,0 +1,2146 @@
+Help on class GridLayout in module kivy.uix.gridlayout:
+
+class GridLayout(kivy.uix.layout.Layout)
+ |  GridLayout(**kwargs)
+ |  
+ |  Grid layout class. See module documentation for more information.
+ |  
+ |  Method resolution order:
+ |      GridLayout
+ |      kivy.uix.layout.Layout
+ |      kivy.uix.widget.Widget
+ |      kivy.uix.widget.WidgetBase
+ |      kivy._event.EventDispatcher
+ |      kivy._event.ObjectWithUid
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  do_layout(self, *largs)
+ |      This function is called when a layout is called by a trigger.
+ |      If you are writing a new Layout subclass, don't call this function
+ |      directly but use :meth:`_trigger_layout` instead.
+ |      
+ |      The function is by default called *before* the next frame, therefore
+ |      the layout isn't updated immediately. Anything depending on the
+ |      positions of e.g. children should be scheduled for the next frame.
+ |      
+ |      .. versionadded:: 1.0.8
+ |  
+ |  get_max_widgets(self)
+ |  
+ |  on_children(self, instance, value)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  col_default_width
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  col_force_default
+ |      BooleanProperty(defaultvalue=True, **kw)
+ |      Property that represents only a boolean value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: boolean
+ |                  Specifies the default value of the property.
+ |  
+ |  cols
+ |      BoundedNumericProperty(*largs, **kw)
+ |      Property that represents a numeric value within a minimum bound and/or
+ |          maximum bound -- within a numeric range.
+ |      
+ |          :Parameters:
+ |              `default`: numeric
+ |                  Specifies the default value of the property.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  If a `min` parameter is included, this specifies the minimum
+ |                  numeric value that will be accepted.
+ |                  If a `max` parameter is included, this specifies the maximum
+ |                  numeric value that will be accepted.
+ |  
+ |  cols_minimum
+ |      DictProperty(defaultvalue=0, rebind=False, **kw)
+ |      Property that represents a dict.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: dict, defaults to {}
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. warning::
+ |      
+ |              Similar to :class:`ListProperty`, when assigning a dict to a
+ |              :class:`DictProperty`, the dict stored in the property is a shallow copy of the
+ |              dict and not the original dict. See :class:`ListProperty` for details.
+ |  
+ |  minimum_height
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  minimum_size
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  minimum_width
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  padding
+ |      VariableListProperty(defaultvalue=None, length=4, **kw)
+ |      A ListProperty that allows you to work with a variable amount of
+ |          list items and to expand them to the desired list size.
+ |      
+ |          For example, GridLayout's padding used to just accept one numeric value
+ |          which was applied equally to the left, top, right and bottom of the
+ |          GridLayout. Now padding can be given one, two or four values, which are
+ |          expanded into a length four list [left, top, right, bottom] and stored
+ |          in the property.
+ |      
+ |          :Parameters:
+ |              `default`: a default list of values
+ |                  Specifies the default values for the list.
+ |              `length`: int, one of 2 or 4.
+ |                  Specifies the length of the final list. The `default` list will
+ |                  be expanded to match a list of this length.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  Not currently used.
+ |      
+ |          Keeping in mind that the `default` list is expanded to a list of length 4,
+ |          here are some examples of how VariabelListProperty's are handled.
+ |      
+ |          - VariableListProperty([1]) represents [1, 1, 1, 1].
+ |          - VariableListProperty([1, 2]) represents [1, 2, 1, 2].
+ |          - VariableListProperty(['1px', (2, 'px'), 3, 4.0]) represents [1, 2, 3, 4.0].
+ |          - VariableListProperty(5) represents [5, 5, 5, 5].
+ |          - VariableListProperty(3, length=2) represents [3, 3].
+ |      
+ |          .. versionadded:: 1.7.0
+ |  
+ |  row_default_height
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  row_force_default
+ |      BooleanProperty(defaultvalue=True, **kw)
+ |      Property that represents only a boolean value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: boolean
+ |                  Specifies the default value of the property.
+ |  
+ |  rows
+ |      BoundedNumericProperty(*largs, **kw)
+ |      Property that represents a numeric value within a minimum bound and/or
+ |          maximum bound -- within a numeric range.
+ |      
+ |          :Parameters:
+ |              `default`: numeric
+ |                  Specifies the default value of the property.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  If a `min` parameter is included, this specifies the minimum
+ |                  numeric value that will be accepted.
+ |                  If a `max` parameter is included, this specifies the maximum
+ |                  numeric value that will be accepted.
+ |  
+ |  rows_minimum
+ |      DictProperty(defaultvalue=0, rebind=False, **kw)
+ |      Property that represents a dict.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: dict, defaults to {}
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. warning::
+ |      
+ |              Similar to :class:`ListProperty`, when assigning a dict to a
+ |              :class:`DictProperty`, the dict stored in the property is a shallow copy of the
+ |              dict and not the original dict. See :class:`ListProperty` for details.
+ |  
+ |  spacing
+ |      VariableListProperty(defaultvalue=None, length=4, **kw)
+ |      A ListProperty that allows you to work with a variable amount of
+ |          list items and to expand them to the desired list size.
+ |      
+ |          For example, GridLayout's padding used to just accept one numeric value
+ |          which was applied equally to the left, top, right and bottom of the
+ |          GridLayout. Now padding can be given one, two or four values, which are
+ |          expanded into a length four list [left, top, right, bottom] and stored
+ |          in the property.
+ |      
+ |          :Parameters:
+ |              `default`: a default list of values
+ |                  Specifies the default values for the list.
+ |              `length`: int, one of 2 or 4.
+ |                  Specifies the length of the final list. The `default` list will
+ |                  be expanded to match a list of this length.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  Not currently used.
+ |      
+ |          Keeping in mind that the `default` list is expanded to a list of length 4,
+ |          here are some examples of how VariabelListProperty's are handled.
+ |      
+ |          - VariableListProperty([1]) represents [1, 1, 1, 1].
+ |          - VariableListProperty([1, 2]) represents [1, 2, 1, 2].
+ |          - VariableListProperty(['1px', (2, 'px'), 3, 4.0]) represents [1, 2, 3, 4.0].
+ |          - VariableListProperty(5) represents [5, 5, 5, 5].
+ |          - VariableListProperty(3, length=2) represents [3, 3].
+ |      
+ |          .. versionadded:: 1.7.0
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from kivy.uix.layout.Layout:
+ |  
+ |  add_widget(self, widget, index=0, canvas=None)
+ |      Add a new widget as a child of this widget.
+ |      
+ |          :Parameters:
+ |              `widget`: :class:`Widget`
+ |                  Widget to add to our list of children.
+ |              `index`: int, defaults to 0
+ |                  Index to insert the widget in the list. Notice that the default
+ |                  of 0 means the widget is inserted at the beginning of the list
+ |                  and will thus be drawn on top of other sibling widgets. For a
+ |                  full discussion of the index and widget hierarchy, please see
+ |                  the :doc:`Widgets Programming Guide <guide/widgets>`.
+ |      
+ |                  .. versionadded:: 1.0.5
+ |              `canvas`: str, defaults to None
+ |                  Canvas to add widget's canvas to. Can be 'before', 'after' or
+ |                  None for the default canvas.
+ |      
+ |                  .. versionadded:: 1.9.0
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> from kivy.uix.button import Button
+ |          >>> from kivy.uix.slider import Slider
+ |          >>> root = Widget()
+ |          >>> root.add_widget(Button())
+ |          >>> slider = Slider()
+ |          >>> root.add_widget(slider)
+ |  
+ |  layout_hint_with_bounds(self, sh_sum, available_space, min_bounded_size, sh_min_vals, sh_max_vals, hint)
+ |      (internal) Computes the appropriate (size) hint for all the
+ |      widgets given (potential) min or max bounds on the widgets' size.
+ |      The ``hint`` list is updated with appropriate sizes.
+ |      
+ |      It walks through the hints and for any widgets whose hint will result
+ |      in violating min or max constraints, it fixes the hint. Any remaining
+ |      or missing space after all the widgets are fixed get distributed
+ |      to the widgets making them smaller or larger according to their
+ |      size hint.
+ |      
+ |      This algorithms knows nothing about the widgets other than what is
+ |      passed through the input params, so it's fairly generic for laying
+ |      things out according to constraints using size hints.
+ |      
+ |      :Parameters:
+ |      
+ |          `sh_sum`: float
+ |              The sum of the size hints (basically ``sum(size_hint)``).
+ |          `available_space`: float
+ |              The amount of pixels available for all the widgets
+ |              whose size hint is not None. Cannot be zero.
+ |          `min_bounded_size`: float
+ |              The minimum amount of space required according to the
+ |              `size_hint_min` of the widgets (basically
+ |              ``sum(size_hint_min)``).
+ |          `sh_min_vals`: list or iterable
+ |              Items in the iterable are the size_hint_min for each widget.
+ |              Can be None. The length should be the same as ``hint``
+ |          `sh_max_vals`: list or iterable
+ |              Items in the iterable are the size_hint_max for each widget.
+ |              Can be None. The length should be the same as ``hint``
+ |          `hint`: list
+ |              A list whose size is the same as the length of ``sh_min_vals``
+ |              and ``sh_min_vals`` whose each element is the corresponding
+ |              size hint value of that element. This list is updated in place
+ |              with correct size hints that ensure the constraints are not
+ |              violated.
+ |      
+ |      :returns:
+ |          Nothing. ``hint`` is updated in place.
+ |  
+ |  remove_widget(self, widget)
+ |      Remove a widget from the children of this widget.
+ |      
+ |          :Parameters:
+ |              `widget`: :class:`Widget`
+ |                  Widget to remove from our children list.
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> from kivy.uix.button import Button
+ |          >>> root = Widget()
+ |          >>> button = Button()
+ |          >>> root.add_widget(button)
+ |          >>> root.remove_widget(button)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from kivy.uix.widget.Widget:
+ |  
+ |  __hash__(self)
+ |      Return hash(self).
+ |  
+ |  apply_class_lang_rules(self, root=None, ignored_consts=set(), rule_children=None)
+ |      Method that is called by kivy to apply the kv rules of this widget's
+ |      class.
+ |      
+ |      :Parameters:
+ |          `root`: :class:`Widget`
+ |              The root widget that instantiated this widget in kv, if the
+ |              widget was instantiated in kv, otherwise ``None``.
+ |          `ignored_consts`: set
+ |              (internal) See :meth:`~kivy.lang.builder.BuilderBase.apply`.
+ |          `rule_children`: list
+ |              (internal) See :meth:`~kivy.lang.builder.BuilderBase.apply`.
+ |      
+ |      This is useful to be able to execute code before/after the class kv
+ |      rules are applied to the widget. E.g. if the kv code requires some
+ |      properties to be initialized before it is used in a binding rule.
+ |      If overwriting remember to call ``super``, otherwise the kv rules will
+ |      not be applied.
+ |      
+ |      In the following example,
+ |      
+ |      .. code-block:: python
+ |      
+ |          class MyWidget(Widget):
+ |              pass
+ |      
+ |          class OtherWidget(MyWidget):
+ |              pass
+ |      
+ |      .. code-block:: kv
+ |      
+ |      <MyWidget>:
+ |          my_prop: some_value
+ |      
+ |      <OtherWidget>:
+ |          other_prop: some_value
+ |      
+ |      When ``OtherWidget`` is instantiated with ``OtherWidget()``, the
+ |      widget's :meth:`apply_class_lang_rules` is called and it applies the
+ |      kv rules of this class - ``<MyWidget>`` and ``<OtherWidget>``.
+ |      
+ |      Similarly, when the widget is instantiated from kv, e.g.
+ |      
+ |      .. code-block:: kv
+ |      
+ |          <MyBox@BoxLayout>:
+ |              height: 55
+ |              OtherWidget:
+ |                  width: 124
+ |      
+ |      ``OtherWidget``'s :meth:`apply_class_lang_rules` is called and it
+ |      applies the kv rules of this class - ``<MyWidget>`` and
+ |      ``<OtherWidget>``.
+ |      
+ |      .. note::
+ |      
+ |          It applies only the class rules not the instance rules. I.e. in the
+ |          above kv example in the ``MyBox`` rule when ``OtherWidget`` is
+ |          instantiated, its :meth:`apply_class_lang_rules` applies the
+ |          ``<MyWidget>`` and ``<OtherWidget>`` rules to it - it does not
+ |          apply the ``width: 124`` rule. The ``width: 124`` rule is part of
+ |          the ``MyBox`` rule and is applied by the ``MyBox``'s instance's
+ |          :meth:`apply_class_lang_rules`.
+ |      
+ |      .. versionchanged:: 1.11.0
+ |  
+ |  clear_widgets(self, children=None)
+ |      Remove all (or the specified) :attr:`~Widget.children` of this widget.
+ |      If the 'children' argument is specified, it should be a list (or
+ |      filtered list) of children of the current widget.
+ |      
+ |      .. versionchanged:: 1.8.0
+ |          The `children` argument can be used to specify the children you
+ |          want to remove.
+ |  
+ |  collide_point(self, x, y)
+ |      Check if a point (x, y) is inside the widget's axis aligned bounding
+ |      box.
+ |      
+ |      :Parameters:
+ |          `x`: numeric
+ |              x position of the point (in parent coordinates)
+ |          `y`: numeric
+ |              y position of the point (in parent coordinates)
+ |      
+ |      :Returns:
+ |          A bool. True if the point is inside the bounding box, False
+ |          otherwise.
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> Widget(pos=(10, 10), size=(50, 50)).collide_point(40, 40)
+ |          True
+ |  
+ |  collide_widget(self, wid)
+ |      Check if another widget collides with this widget. This function
+ |      performs an axis-aligned bounding box intersection test by default.
+ |      
+ |      :Parameters:
+ |          `wid`: :class:`Widget` class
+ |              Widget to test collision with.
+ |      
+ |      :Returns:
+ |          bool. True if the other widget collides with this widget, False
+ |          otherwise.
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> wid = Widget(size=(50, 50))
+ |          >>> wid2 = Widget(size=(50, 50), pos=(25, 25))
+ |          >>> wid.collide_widget(wid2)
+ |          True
+ |          >>> wid2.pos = (55, 55)
+ |          >>> wid.collide_widget(wid2)
+ |          False
+ |  
+ |  dec_disabled(self, count=1)
+ |  
+ |  export_as_image(self, *args, **kwargs)
+ |      Return an core :class:`~kivy.core.image.Image` of the actual
+ |      widget.
+ |      
+ |      .. versionadded:: 1.11.0
+ |  
+ |  export_to_png(self, filename, *args, **kwargs)
+ |      Saves an image of the widget and its children in png format at the
+ |      specified filename. Works by removing the widget canvas from its
+ |      parent, rendering to an :class:`~kivy.graphics.fbo.Fbo`, and calling
+ |      :meth:`~kivy.graphics.texture.Texture.save`.
+ |      
+ |      .. note::
+ |      
+ |          The image includes only this widget and its children. If you want
+ |          to include widgets elsewhere in the tree, you must call
+ |          :meth:`~Widget.export_to_png` from their common parent, or use
+ |          :meth:`~kivy.core.window.WindowBase.screenshot` to capture the
+ |          whole window.
+ |      
+ |      .. note::
+ |      
+ |          The image will be saved in png format, you should include the
+ |          extension in your filename.
+ |      
+ |      .. versionadded:: 1.9.0
+ |      
+ |      :Parameters:
+ |          `filename`: str
+ |              The filename with which to save the png.
+ |          `scale`: float
+ |              The amount by which to scale the saved image, defaults to 1.
+ |      
+ |              .. versionadded:: 1.11.0
+ |  
+ |  get_center_x(self)
+ |  
+ |  get_center_y(self)
+ |  
+ |  get_disabled(self)
+ |  
+ |  get_parent_window(self)
+ |      Return the parent window.
+ |      
+ |      :Returns:
+ |          Instance of the parent window. Can be a
+ |          :class:`~kivy.core.window.WindowBase` or
+ |          :class:`Widget`.
+ |  
+ |  get_right(self)
+ |  
+ |  get_root_window(self)
+ |      Return the root window.
+ |      
+ |      :Returns:
+ |          Instance of the root window. Can be a
+ |          :class:`~kivy.core.window.WindowBase` or
+ |          :class:`Widget`.
+ |  
+ |  get_top(self)
+ |  
+ |  get_window_matrix(self, x=0, y=0)
+ |      Calculate the transformation matrix to convert between window and
+ |      widget coordinates.
+ |      
+ |      :Parameters:
+ |          `x`: float, defaults to 0
+ |              Translates the matrix on the x axis.
+ |          `y`: float, defaults to 0
+ |              Translates the matrix on the y axis.
+ |  
+ |  inc_disabled(self, count=1)
+ |  
+ |  on_kv_post(self, base_widget)
+ |  
+ |  on_opacity(self, instance, value)
+ |  
+ |  on_touch_down(self, touch)
+ |      Receive a touch down event.
+ |      
+ |      :Parameters:
+ |          `touch`: :class:`~kivy.input.motionevent.MotionEvent` class
+ |              Touch received. The touch is in parent coordinates. See
+ |              :mod:`~kivy.uix.relativelayout` for a discussion on
+ |              coordinate systems.
+ |      
+ |      :Returns: bool
+ |          If True, the dispatching of the touch event will stop.
+ |          If False, the event will continue to be dispatched to the rest
+ |          of the widget tree.
+ |  
+ |  on_touch_move(self, touch)
+ |      Receive a touch move event. The touch is in parent coordinates.
+ |      
+ |      See :meth:`on_touch_down` for more information.
+ |  
+ |  on_touch_up(self, touch)
+ |      Receive a touch up event. The touch is in parent coordinates.
+ |      
+ |      See :meth:`on_touch_down` for more information.
+ |  
+ |  set_center_x(self, value)
+ |  
+ |  set_center_y(self, value)
+ |  
+ |  set_disabled(self, value)
+ |  
+ |  set_right(self, value)
+ |  
+ |  set_top(self, value)
+ |  
+ |  to_local(self, x, y, relative=False)
+ |      Transform parent coordinates to local coordinates. See
+ |      :mod:`~kivy.uix.relativelayout` for details on the coordinate systems.
+ |      
+ |      :Parameters:
+ |          `relative`: bool, defaults to False
+ |              Change to True if you want to translate coordinates to
+ |              relative widget coordinates.
+ |  
+ |  to_parent(self, x, y, relative=False)
+ |      Transform local coordinates to parent coordinates. See
+ |      :mod:`~kivy.uix.relativelayout` for details on the coordinate systems.
+ |      
+ |      :Parameters:
+ |          `relative`: bool, defaults to False
+ |              Change to True if you want to translate relative positions from
+ |              a widget to its parent coordinates.
+ |  
+ |  to_widget(self, x, y, relative=False)
+ |      Convert the given coordinate from window to local widget
+ |      coordinates. See :mod:`~kivy.uix.relativelayout` for details on the
+ |      coordinate systems.
+ |  
+ |  to_window(self, x, y, initial=True, relative=False)
+ |      Transform local coordinates to window coordinates. See
+ |      :mod:`~kivy.uix.relativelayout` for details on the coordinate systems.
+ |  
+ |  walk(self, restrict=False, loopback=False)
+ |      Iterator that walks the widget tree starting with this widget and
+ |      goes forward returning widgets in the order in which layouts display
+ |      them.
+ |      
+ |      :Parameters:
+ |          `restrict`: bool, defaults to False
+ |              If True, it will only iterate through the widget and its
+ |              children (or children of its children etc.). Defaults to False.
+ |          `loopback`: bool, defaults to False
+ |              If True, when the last widget in the tree is reached,
+ |              it'll loop back to the uppermost root and start walking until
+ |              we hit this widget again. Naturally, it can only loop back when
+ |              `restrict` is False. Defaults to False.
+ |      
+ |      :return:
+ |          A generator that walks the tree, returning widgets in the
+ |          forward layout order.
+ |      
+ |      For example, given a tree with the following structure:
+ |      
+ |      .. code-block:: kv
+ |      
+ |          GridLayout:
+ |              Button
+ |              BoxLayout:
+ |                  id: box
+ |                  Widget
+ |                  Button
+ |              Widget
+ |      
+ |      walking this tree:
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> # Call walk on box with loopback True, and restrict False
+ |          >>> [type(widget) for widget in box.walk(loopback=True)]
+ |          [<class 'BoxLayout'>, <class 'Widget'>, <class 'Button'>,
+ |              <class 'Widget'>, <class 'GridLayout'>, <class 'Button'>]
+ |          >>> # Now with loopback False, and restrict False
+ |          >>> [type(widget) for widget in box.walk()]
+ |          [<class 'BoxLayout'>, <class 'Widget'>, <class 'Button'>,
+ |              <class 'Widget'>]
+ |          >>> # Now with restrict True
+ |          >>> [type(widget) for widget in box.walk(restrict=True)]
+ |          [<class 'BoxLayout'>, <class 'Widget'>, <class 'Button'>]
+ |      
+ |      .. versionadded:: 1.9.0
+ |  
+ |  walk_reverse(self, loopback=False)
+ |      Iterator that walks the widget tree backwards starting with the
+ |      widget before this, and going backwards returning widgets in the
+ |      reverse order in which layouts display them.
+ |      
+ |      This walks in the opposite direction of :meth:`walk`, so a list of the
+ |      tree generated with :meth:`walk` will be in reverse order compared
+ |      to the list generated with this, provided `loopback` is True.
+ |      
+ |      :Parameters:
+ |          `loopback`: bool, defaults to False
+ |              If True, when the uppermost root in the tree is
+ |              reached, it'll loop back to the last widget and start walking
+ |              back until after we hit widget again. Defaults to False.
+ |      
+ |      :return:
+ |          A generator that walks the tree, returning widgets in the
+ |          reverse layout order.
+ |      
+ |      For example, given a tree with the following structure:
+ |      
+ |      .. code-block:: kv
+ |      
+ |          GridLayout:
+ |              Button
+ |              BoxLayout:
+ |                  id: box
+ |                  Widget
+ |                  Button
+ |              Widget
+ |      
+ |      walking this tree:
+ |      
+ |      .. code-block:: python
+ |      
+ |          >>> # Call walk on box with loopback True
+ |          >>> [type(widget) for widget in box.walk_reverse(loopback=True)]
+ |          [<class 'Button'>, <class 'GridLayout'>, <class 'Widget'>,
+ |              <class 'Button'>, <class 'Widget'>, <class 'BoxLayout'>]
+ |          >>> # Now with loopback False
+ |          >>> [type(widget) for widget in box.walk_reverse()]
+ |          [<class 'Button'>, <class 'GridLayout'>]
+ |          >>> forward = [w for w in box.walk(loopback=True)]
+ |          >>> backward = [w for w in box.walk_reverse(loopback=True)]
+ |          >>> forward == backward[::-1]
+ |          True
+ |      
+ |      .. versionadded:: 1.9.0
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from kivy.uix.widget.Widget:
+ |  
+ |  __self__
+ |  
+ |  center
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  center_x
+ |      AliasProperty(getter, setter=None, rebind=False, **kwargs)
+ |      Create a property with a custom getter and setter.
+ |      
+ |          If you don't find a Property class that fits to your needs, you can make
+ |          your own by creating custom Python getter and setter methods.
+ |      
+ |          Example from kivy/uix/widget.py where `x` and `width` are instances of
+ |          :class:`NumericProperty`::
+ |      
+ |              def get_right(self):
+ |                  return self.x + self.width
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |              right = AliasProperty(get_right, set_right, bind=['x', 'width'])
+ |      
+ |          If `x` were a non Kivy property then you have to return `True` from setter
+ |          to dispatch new value of `right`::
+ |      
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |                  return True
+ |      
+ |          Usually `bind` list should contain all Kivy properties used in getter
+ |          method. If you return `True` it will cause a dispatch which one should do
+ |          when the property value has changed, but keep in mind that the property
+ |          could already have dispatched the changed value if a kivy property the
+ |          alias property is bound was set in the setter, causing a second dispatch
+ |          if the setter returns `True`.
+ |      
+ |          If you want to cache the value returned by getter then pass `cache=True`.
+ |          This way getter will only be called if new value is set or one of the
+ |          binded properties changes. In both cases new value of alias property will
+ |          be cached again.
+ |      
+ |          To make property readonly pass `None` as setter. This way `AttributeError`
+ |          will be raised on every set attempt::
+ |      
+ |              right = AliasProperty(get_right, None, bind=['x', 'width'], cache=True)
+ |      
+ |          :Parameters:
+ |              `getter`: function
+ |                  Function to use as a property getter.
+ |              `setter`: function
+ |                  Function to use as a property setter. Callbacks bound to the
+ |                  alias property won't be called when the property is set (e.g.
+ |                  `right = 10`), unless the setter returns `True`.
+ |              `bind`: list/tuple
+ |                  Properties to observe for changes as property name strings.
+ |                  Changing values of this properties will dispatch value of the
+ |                  alias property.
+ |              `cache`: boolean
+ |                  If `True`, the value will be cached until one of the binded
+ |                  elements changes or if setter returns `True`.
+ |              `rebind`: bool, defaults to `False`
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.4.0
+ |              Parameter `cache` added.
+ |  
+ |  center_y
+ |      AliasProperty(getter, setter=None, rebind=False, **kwargs)
+ |      Create a property with a custom getter and setter.
+ |      
+ |          If you don't find a Property class that fits to your needs, you can make
+ |          your own by creating custom Python getter and setter methods.
+ |      
+ |          Example from kivy/uix/widget.py where `x` and `width` are instances of
+ |          :class:`NumericProperty`::
+ |      
+ |              def get_right(self):
+ |                  return self.x + self.width
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |              right = AliasProperty(get_right, set_right, bind=['x', 'width'])
+ |      
+ |          If `x` were a non Kivy property then you have to return `True` from setter
+ |          to dispatch new value of `right`::
+ |      
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |                  return True
+ |      
+ |          Usually `bind` list should contain all Kivy properties used in getter
+ |          method. If you return `True` it will cause a dispatch which one should do
+ |          when the property value has changed, but keep in mind that the property
+ |          could already have dispatched the changed value if a kivy property the
+ |          alias property is bound was set in the setter, causing a second dispatch
+ |          if the setter returns `True`.
+ |      
+ |          If you want to cache the value returned by getter then pass `cache=True`.
+ |          This way getter will only be called if new value is set or one of the
+ |          binded properties changes. In both cases new value of alias property will
+ |          be cached again.
+ |      
+ |          To make property readonly pass `None` as setter. This way `AttributeError`
+ |          will be raised on every set attempt::
+ |      
+ |              right = AliasProperty(get_right, None, bind=['x', 'width'], cache=True)
+ |      
+ |          :Parameters:
+ |              `getter`: function
+ |                  Function to use as a property getter.
+ |              `setter`: function
+ |                  Function to use as a property setter. Callbacks bound to the
+ |                  alias property won't be called when the property is set (e.g.
+ |                  `right = 10`), unless the setter returns `True`.
+ |              `bind`: list/tuple
+ |                  Properties to observe for changes as property name strings.
+ |                  Changing values of this properties will dispatch value of the
+ |                  alias property.
+ |              `cache`: boolean
+ |                  If `True`, the value will be cached until one of the binded
+ |                  elements changes or if setter returns `True`.
+ |              `rebind`: bool, defaults to `False`
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.4.0
+ |              Parameter `cache` added.
+ |  
+ |  children
+ |      ListProperty(defaultvalue=0, **kw)
+ |      Property that represents a list.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: list, defaults to []
+ |                  Specifies the default value of the property.
+ |      
+ |          .. warning::
+ |      
+ |              When assigning a list to a :class:`ListProperty`, the list stored in
+ |              the property is a shallow copy of the list and not the original list. This can
+ |              be demonstrated with the following example::
+ |      
+ |                  >>> class MyWidget(Widget):
+ |                  >>>     my_list = ListProperty([])
+ |      
+ |                  >>> widget = MyWidget()
+ |                  >>> my_list = [1, 5, {'hi': 'hello'}]
+ |                  >>> widget.my_list = my_list
+ |                  >>> print(my_list is widget.my_list)
+ |                  False
+ |                  >>> my_list.append(10)
+ |                  >>> print(my_list, widget.my_list)
+ |                  [1, 5, {'hi': 'hello'}, 10] [1, 5, {'hi': 'hello'}]
+ |      
+ |              However, changes to nested levels will affect the property as well,
+ |              since the property uses a shallow copy of my_list.
+ |      
+ |                  >>> my_list[2]['hi'] = 'bye'
+ |                  >>> print(my_list, widget.my_list)
+ |                  [1, 5, {'hi': 'bye'}, 10] [1, 5, {'hi': 'bye'}]
+ |  
+ |  cls
+ |      ListProperty(defaultvalue=0, **kw)
+ |      Property that represents a list.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: list, defaults to []
+ |                  Specifies the default value of the property.
+ |      
+ |          .. warning::
+ |      
+ |              When assigning a list to a :class:`ListProperty`, the list stored in
+ |              the property is a shallow copy of the list and not the original list. This can
+ |              be demonstrated with the following example::
+ |      
+ |                  >>> class MyWidget(Widget):
+ |                  >>>     my_list = ListProperty([])
+ |      
+ |                  >>> widget = MyWidget()
+ |                  >>> my_list = [1, 5, {'hi': 'hello'}]
+ |                  >>> widget.my_list = my_list
+ |                  >>> print(my_list is widget.my_list)
+ |                  False
+ |                  >>> my_list.append(10)
+ |                  >>> print(my_list, widget.my_list)
+ |                  [1, 5, {'hi': 'hello'}, 10] [1, 5, {'hi': 'hello'}]
+ |      
+ |              However, changes to nested levels will affect the property as well,
+ |              since the property uses a shallow copy of my_list.
+ |      
+ |                  >>> my_list[2]['hi'] = 'bye'
+ |                  >>> print(my_list, widget.my_list)
+ |                  [1, 5, {'hi': 'bye'}, 10] [1, 5, {'hi': 'bye'}]
+ |  
+ |  disabled
+ |      AliasProperty(getter, setter=None, rebind=False, **kwargs)
+ |      Create a property with a custom getter and setter.
+ |      
+ |          If you don't find a Property class that fits to your needs, you can make
+ |          your own by creating custom Python getter and setter methods.
+ |      
+ |          Example from kivy/uix/widget.py where `x` and `width` are instances of
+ |          :class:`NumericProperty`::
+ |      
+ |              def get_right(self):
+ |                  return self.x + self.width
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |              right = AliasProperty(get_right, set_right, bind=['x', 'width'])
+ |      
+ |          If `x` were a non Kivy property then you have to return `True` from setter
+ |          to dispatch new value of `right`::
+ |      
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |                  return True
+ |      
+ |          Usually `bind` list should contain all Kivy properties used in getter
+ |          method. If you return `True` it will cause a dispatch which one should do
+ |          when the property value has changed, but keep in mind that the property
+ |          could already have dispatched the changed value if a kivy property the
+ |          alias property is bound was set in the setter, causing a second dispatch
+ |          if the setter returns `True`.
+ |      
+ |          If you want to cache the value returned by getter then pass `cache=True`.
+ |          This way getter will only be called if new value is set or one of the
+ |          binded properties changes. In both cases new value of alias property will
+ |          be cached again.
+ |      
+ |          To make property readonly pass `None` as setter. This way `AttributeError`
+ |          will be raised on every set attempt::
+ |      
+ |              right = AliasProperty(get_right, None, bind=['x', 'width'], cache=True)
+ |      
+ |          :Parameters:
+ |              `getter`: function
+ |                  Function to use as a property getter.
+ |              `setter`: function
+ |                  Function to use as a property setter. Callbacks bound to the
+ |                  alias property won't be called when the property is set (e.g.
+ |                  `right = 10`), unless the setter returns `True`.
+ |              `bind`: list/tuple
+ |                  Properties to observe for changes as property name strings.
+ |                  Changing values of this properties will dispatch value of the
+ |                  alias property.
+ |              `cache`: boolean
+ |                  If `True`, the value will be cached until one of the binded
+ |                  elements changes or if setter returns `True`.
+ |              `rebind`: bool, defaults to `False`
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.4.0
+ |              Parameter `cache` added.
+ |  
+ |  height
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  id
+ |      StringProperty(defaultvalue='', **kw)
+ |      Property that represents a string value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: string, defaults to ''
+ |                  Specifies the default value of the property.
+ |  
+ |  ids
+ |      DictProperty(defaultvalue=0, rebind=False, **kw)
+ |      Property that represents a dict.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: dict, defaults to {}
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. warning::
+ |      
+ |              Similar to :class:`ListProperty`, when assigning a dict to a
+ |              :class:`DictProperty`, the dict stored in the property is a shallow copy of the
+ |              dict and not the original dict. See :class:`ListProperty` for details.
+ |  
+ |  opacity
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  parent
+ |      ObjectProperty(defaultvalue=None, rebind=False, **kw)
+ |      Property that represents a Python object.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: object type
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  Whether kv rules using this object as an intermediate attribute
+ |                  in a kv rule, will update the bound property when this object
+ |                  changes.
+ |      
+ |                  That is the standard behavior is that if there's a kv rule
+ |                  ``text: self.a.b.c.d``, where ``a``, ``b``, and ``c`` are
+ |                  properties with ``rebind`` ``False`` and ``d`` is a
+ |                  :class:`StringProperty`. Then when the rule is applied, ``text``
+ |                  becomes bound only to ``d``. If ``a``, ``b``, or ``c`` change,
+ |                  ``text`` still remains bound to ``d``. Furthermore, if any of them
+ |                  were ``None`` when the rule was initially evaluated, e.g. ``b`` was
+ |                  ``None``; then ``text`` is bound to ``b`` and will not become bound
+ |                  to ``d`` even when ``b`` is changed to not be ``None``.
+ |      
+ |                  By setting ``rebind`` to ``True``, however, the rule will be
+ |                  re-evaluated and all the properties rebound when that intermediate
+ |                  property changes. E.g. in the example above, whenever ``b`` changes
+ |                  or becomes not ``None`` if it was ``None`` before, ``text`` is
+ |                  evaluated again and becomes rebound to ``d``. The overall result is
+ |                  that ``text`` is now bound to all the properties among ``a``,
+ |                  ``b``, or ``c`` that have ``rebind`` set to ``True``.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  `baseclass`
+ |                      If kwargs includes a `baseclass` argument, this value will be
+ |                      used for validation: `isinstance(value, kwargs['baseclass'])`.
+ |      
+ |          .. warning::
+ |      
+ |              To mark the property as changed, you must reassign a new python object.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.7.0
+ |      
+ |              `baseclass` parameter added.
+ |  
+ |  pos
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  pos_hint
+ |      ObjectProperty(defaultvalue=None, rebind=False, **kw)
+ |      Property that represents a Python object.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: object type
+ |                  Specifies the default value of the property.
+ |              `rebind`: bool, defaults to False
+ |                  Whether kv rules using this object as an intermediate attribute
+ |                  in a kv rule, will update the bound property when this object
+ |                  changes.
+ |      
+ |                  That is the standard behavior is that if there's a kv rule
+ |                  ``text: self.a.b.c.d``, where ``a``, ``b``, and ``c`` are
+ |                  properties with ``rebind`` ``False`` and ``d`` is a
+ |                  :class:`StringProperty`. Then when the rule is applied, ``text``
+ |                  becomes bound only to ``d``. If ``a``, ``b``, or ``c`` change,
+ |                  ``text`` still remains bound to ``d``. Furthermore, if any of them
+ |                  were ``None`` when the rule was initially evaluated, e.g. ``b`` was
+ |                  ``None``; then ``text`` is bound to ``b`` and will not become bound
+ |                  to ``d`` even when ``b`` is changed to not be ``None``.
+ |      
+ |                  By setting ``rebind`` to ``True``, however, the rule will be
+ |                  re-evaluated and all the properties rebound when that intermediate
+ |                  property changes. E.g. in the example above, whenever ``b`` changes
+ |                  or becomes not ``None`` if it was ``None`` before, ``text`` is
+ |                  evaluated again and becomes rebound to ``d``. The overall result is
+ |                  that ``text`` is now bound to all the properties among ``a``,
+ |                  ``b``, or ``c`` that have ``rebind`` set to ``True``.
+ |              `\*\*kwargs`: a list of keyword arguments
+ |                  `baseclass`
+ |                      If kwargs includes a `baseclass` argument, this value will be
+ |                      used for validation: `isinstance(value, kwargs['baseclass'])`.
+ |      
+ |          .. warning::
+ |      
+ |              To mark the property as changed, you must reassign a new python object.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.7.0
+ |      
+ |              `baseclass` parameter added.
+ |  
+ |  proxy_ref
+ |      Return a proxy reference to the widget, i.e. without creating a
+ |      reference to the widget. See `weakref.proxy
+ |      <http://docs.python.org/2/library/weakref.html?highlight        =proxy#weakref.proxy>`_ for more information.
+ |      
+ |      .. versionadded:: 1.7.2
+ |  
+ |  right
+ |      AliasProperty(getter, setter=None, rebind=False, **kwargs)
+ |      Create a property with a custom getter and setter.
+ |      
+ |          If you don't find a Property class that fits to your needs, you can make
+ |          your own by creating custom Python getter and setter methods.
+ |      
+ |          Example from kivy/uix/widget.py where `x` and `width` are instances of
+ |          :class:`NumericProperty`::
+ |      
+ |              def get_right(self):
+ |                  return self.x + self.width
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |              right = AliasProperty(get_right, set_right, bind=['x', 'width'])
+ |      
+ |          If `x` were a non Kivy property then you have to return `True` from setter
+ |          to dispatch new value of `right`::
+ |      
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |                  return True
+ |      
+ |          Usually `bind` list should contain all Kivy properties used in getter
+ |          method. If you return `True` it will cause a dispatch which one should do
+ |          when the property value has changed, but keep in mind that the property
+ |          could already have dispatched the changed value if a kivy property the
+ |          alias property is bound was set in the setter, causing a second dispatch
+ |          if the setter returns `True`.
+ |      
+ |          If you want to cache the value returned by getter then pass `cache=True`.
+ |          This way getter will only be called if new value is set or one of the
+ |          binded properties changes. In both cases new value of alias property will
+ |          be cached again.
+ |      
+ |          To make property readonly pass `None` as setter. This way `AttributeError`
+ |          will be raised on every set attempt::
+ |      
+ |              right = AliasProperty(get_right, None, bind=['x', 'width'], cache=True)
+ |      
+ |          :Parameters:
+ |              `getter`: function
+ |                  Function to use as a property getter.
+ |              `setter`: function
+ |                  Function to use as a property setter. Callbacks bound to the
+ |                  alias property won't be called when the property is set (e.g.
+ |                  `right = 10`), unless the setter returns `True`.
+ |              `bind`: list/tuple
+ |                  Properties to observe for changes as property name strings.
+ |                  Changing values of this properties will dispatch value of the
+ |                  alias property.
+ |              `cache`: boolean
+ |                  If `True`, the value will be cached until one of the binded
+ |                  elements changes or if setter returns `True`.
+ |              `rebind`: bool, defaults to `False`
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.4.0
+ |              Parameter `cache` added.
+ |  
+ |  size
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  size_hint
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  size_hint_max
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  size_hint_max_x
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  size_hint_max_y
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  size_hint_min
+ |      ReferenceListProperty(*largs, **kw)
+ |      Property that allows the creation of a tuple of other properties.
+ |      
+ |          For example, if `x` and `y` are :class:`NumericProperty`\s, we can create a
+ |          :class:`ReferenceListProperty` for the `pos`. If you change the value of
+ |          `pos`, it will automatically change the values of `x` and `y` accordingly.
+ |          If you read the value of `pos`, it will return a tuple with the values of
+ |          `x` and `y`.
+ |      
+ |          For example::
+ |      
+ |              class MyWidget(EventDispatcher):
+ |                  x = NumericProperty(0)
+ |                  y = NumericProperty(0)
+ |                  pos = ReferenceListProperty(x, y)
+ |  
+ |  size_hint_min_x
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  size_hint_min_y
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  size_hint_x
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  size_hint_y
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  top
+ |      AliasProperty(getter, setter=None, rebind=False, **kwargs)
+ |      Create a property with a custom getter and setter.
+ |      
+ |          If you don't find a Property class that fits to your needs, you can make
+ |          your own by creating custom Python getter and setter methods.
+ |      
+ |          Example from kivy/uix/widget.py where `x` and `width` are instances of
+ |          :class:`NumericProperty`::
+ |      
+ |              def get_right(self):
+ |                  return self.x + self.width
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |              right = AliasProperty(get_right, set_right, bind=['x', 'width'])
+ |      
+ |          If `x` were a non Kivy property then you have to return `True` from setter
+ |          to dispatch new value of `right`::
+ |      
+ |              def set_right(self, value):
+ |                  self.x = value - self.width
+ |                  return True
+ |      
+ |          Usually `bind` list should contain all Kivy properties used in getter
+ |          method. If you return `True` it will cause a dispatch which one should do
+ |          when the property value has changed, but keep in mind that the property
+ |          could already have dispatched the changed value if a kivy property the
+ |          alias property is bound was set in the setter, causing a second dispatch
+ |          if the setter returns `True`.
+ |      
+ |          If you want to cache the value returned by getter then pass `cache=True`.
+ |          This way getter will only be called if new value is set or one of the
+ |          binded properties changes. In both cases new value of alias property will
+ |          be cached again.
+ |      
+ |          To make property readonly pass `None` as setter. This way `AttributeError`
+ |          will be raised on every set attempt::
+ |      
+ |              right = AliasProperty(get_right, None, bind=['x', 'width'], cache=True)
+ |      
+ |          :Parameters:
+ |              `getter`: function
+ |                  Function to use as a property getter.
+ |              `setter`: function
+ |                  Function to use as a property setter. Callbacks bound to the
+ |                  alias property won't be called when the property is set (e.g.
+ |                  `right = 10`), unless the setter returns `True`.
+ |              `bind`: list/tuple
+ |                  Properties to observe for changes as property name strings.
+ |                  Changing values of this properties will dispatch value of the
+ |                  alias property.
+ |              `cache`: boolean
+ |                  If `True`, the value will be cached until one of the binded
+ |                  elements changes or if setter returns `True`.
+ |              `rebind`: bool, defaults to `False`
+ |                  See :class:`ObjectProperty` for details.
+ |      
+ |          .. versionchanged:: 1.9.0
+ |              `rebind` has been introduced.
+ |      
+ |          .. versionchanged:: 1.4.0
+ |              Parameter `cache` added.
+ |  
+ |  width
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  x
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  y
+ |      NumericProperty(defaultvalue=0, **kw)
+ |      Property that represents a numeric value.
+ |      
+ |          :Parameters:
+ |              `defaultvalue`: int or float, defaults to 0
+ |                  Specifies the default value of the property.
+ |      
+ |          >>> wid = Widget()
+ |          >>> wid.x = 42
+ |          >>> print(wid.x)
+ |          42
+ |          >>> wid.x = "plop"
+ |           Traceback (most recent call last):
+ |             File "<stdin>", line 1, in <module>
+ |             File "properties.pyx", line 93, in kivy.properties.Property.__set__
+ |             File "properties.pyx", line 111, in kivy.properties.Property.set
+ |             File "properties.pyx", line 159, in kivy.properties.NumericProperty.check
+ |           ValueError: NumericProperty accept only int/float
+ |      
+ |          .. versionchanged:: 1.4.1
+ |              NumericProperty can now accept custom text and tuple value to indicate a
+ |              type, like "in", "pt", "px", "cm", "mm", in the format: '10pt' or (10,
+ |              'pt').
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from kivy.uix.widget.Widget:
+ |  
+ |  __events__ = ('on_touch_down', 'on_touch_move', 'on_touch_up', 'on_kv_...
+ |  
+ |  __metaclass__ = <class 'kivy.uix.widget.WidgetMetaclass'>
+ |      Metaclass to automatically register new widgets for the
+ |      :class:`~kivy.factory.Factory`.
+ |      
+ |      .. warning::
+ |          This metaclass is used by the Widget. Do not use it directly!
+ |  
+ |  canvas = None
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from kivy.uix.widget.WidgetBase:
+ |  
+ |  __dict__
+ |      dictionary for instance variables (if defined)
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from kivy._event.EventDispatcher:
+ |  
+ |  __reduce__ = __reduce_cython__(...)
+ |      EventDispatcher.__reduce_cython__(self)
+ |  
+ |  __setstate__ = __setstate_cython__(...)
+ |      EventDispatcher.__setstate_cython__(self, __pyx_state)
+ |  
+ |  apply_property(...)
+ |      EventDispatcher.apply_property(self, **kwargs)
+ |      Adds properties at runtime to the class. The function accepts
+ |              keyword arguments of the form `prop_name=prop`, where `prop` is a
+ |              :class:`Property` instance and `prop_name` is the name of the attribute
+ |              of the property.
+ |      
+ |              .. versionadded:: 1.9.1
+ |      
+ |              .. warning::
+ |      
+ |                  This method is not recommended for common usage because you should
+ |                  declare the properties in your class instead of using this method.
+ |      
+ |              For example::
+ |      
+ |                  >>> print(wid.property('sticks', quiet=True))
+ |                  None
+ |                  >>> wid.apply_property(sticks=ObjectProperty(55, max=10))
+ |                  >>> print(wid.property('sticks', quiet=True))
+ |                  <kivy.properties.ObjectProperty object at 0x04303130>
+ |  
+ |  bind(...)
+ |      EventDispatcher.bind(self, **kwargs)
+ |      Bind an event type or a property to a callback.
+ |      
+ |              Usage::
+ |      
+ |                  # With properties
+ |                  def my_x_callback(obj, value):
+ |                      print('on object', obj, 'x changed to', value)
+ |                  def my_width_callback(obj, value):
+ |                      print('on object', obj, 'width changed to', value)
+ |                  self.bind(x=my_x_callback, width=my_width_callback)
+ |      
+ |                  # With event
+ |                  def my_press_callback(obj):
+ |                      print('event on object', obj)
+ |                  self.bind(on_press=my_press_callback)
+ |      
+ |              In general, property callbacks are called with 2 arguments (the
+ |              object and the property's new value) and event callbacks with
+ |              one argument (the object). The example above illustrates this.
+ |      
+ |              The following example demonstrates various ways of using the bind
+ |              function in a complete application::
+ |      
+ |                  from kivy.uix.boxlayout import BoxLayout
+ |                  from kivy.app import App
+ |                  from kivy.uix.button import Button
+ |                  from functools import partial
+ |      
+ |      
+ |                  class DemoBox(BoxLayout):
+ |                      """
+ |                      This class demonstrates various techniques that can be used for binding to
+ |                      events. Although parts could me made more optimal, advanced Python concepts
+ |                      are avoided for the sake of readability and clarity.
+ |                      """
+ |                      def __init__(self, **kwargs):
+ |                          super(DemoBox, self).__init__(**kwargs)
+ |                          self.orientation = "vertical"
+ |      
+ |                          # We start with binding to a normal event. The only argument
+ |                          # passed to the callback is the object which we have bound to.
+ |                          btn = Button(text="Normal binding to event")
+ |                          btn.bind(on_press=self.on_event)
+ |      
+ |                          # Next, we bind to a standard property change event. This typically
+ |                          # passes 2 arguments: the object and the value
+ |                          btn2 = Button(text="Normal binding to a property change")
+ |                          btn2.bind(state=self.on_property)
+ |      
+ |                          # Here we use anonymous functions (a.k.a lambdas) to perform binding.
+ |                          # Their advantage is that you can avoid declaring new functions i.e.
+ |                          # they offer a concise way to "redirect" callbacks.
+ |                          btn3 = Button(text="Using anonymous functions.")
+ |                          btn3.bind(on_press=lambda x: self.on_event(None))
+ |      
+ |                          # You can also declare a function that accepts a variable number of
+ |                          # positional and keyword arguments and use introspection to determine
+ |                          # what is being passed in. This is very handy for debugging as well
+ |                          # as function re-use. Here, we use standard event binding to a function
+ |                          # that accepts optional positional and keyword arguments.
+ |                          btn4 = Button(text="Use a flexible function")
+ |                          btn4.bind(on_press=self.on_anything)
+ |      
+ |                          # Lastly, we show how to use partial functions. They are sometimes
+ |                          # difficult to grasp, but provide a very flexible and powerful way to
+ |                          # reuse functions.
+ |                          btn5 = Button(text="Using partial functions. For hardcores.")
+ |                          btn5.bind(on_press=partial(self.on_anything, "1", "2", monthy="python"))
+ |      
+ |                          for but in [btn, btn2, btn3, btn4, btn5]:
+ |                              self.add_widget(but)
+ |      
+ |                      def on_event(self, obj):
+ |                          print("Typical event from", obj)
+ |      
+ |                      def on_property(self, obj, value):
+ |                          print("Typical property change from", obj, "to", value)
+ |      
+ |                      def on_anything(self, *args, **kwargs):
+ |                          print('The flexible function has *args of', str(args),
+ |                              "and **kwargs of", str(kwargs))
+ |      
+ |      
+ |                  class DemoApp(App):
+ |                      def build(self):
+ |                          return DemoBox()
+ |      
+ |                  if __name__ == "__main__":
+ |                      DemoApp().run()
+ |      
+ |              When binding a function to an event or property, a
+ |              :class:`kivy.weakmethod.WeakMethod` of the callback is saved, and
+ |              when dispatching the callback is removed if the callback reference
+ |              becomes invalid.
+ |      
+ |              If a callback has already been bound to a given event or property,
+ |              it won't be added again.
+ |  
+ |  create_property(...)
+ |      EventDispatcher.create_property(self, str name, value=None, *largs, **kwargs)
+ |      Create a new property at runtime.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              .. versionchanged:: 1.8.0
+ |                  `value` parameter added, can be used to set the default value of the
+ |                  property. Also, the type of the value is used to specialize the
+ |                  created property.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  In the past, if `value` was of type `bool`, a `NumericProperty`
+ |                  would be created, now a `BooleanProperty` is created.
+ |      
+ |                  Also, now and positional and keyword arguments are passed to the
+ |                  property when created.
+ |      
+ |              .. warning::
+ |      
+ |                  This function is designed for the Kivy language, don't use it in
+ |                  your code. You should declare the property in your class instead of
+ |                  using this method.
+ |      
+ |              :Parameters:
+ |                  `name`: string
+ |                      Name of the property
+ |                  `value`: object, optional
+ |                      Default value of the property. Type is also used for creating
+ |                      more appropriate property types. Defaults to None.
+ |      
+ |      
+ |              ::
+ |      
+ |                  >>> mywidget = Widget()
+ |                  >>> mywidget.create_property('custom')
+ |                  >>> mywidget.custom = True
+ |                  >>> print(mywidget.custom)
+ |                  True
+ |  
+ |  dispatch(...)
+ |      EventDispatcher.dispatch(self, basestring event_type, *largs, **kwargs)
+ |      Dispatch an event across all the handlers added in bind/fbind().
+ |              As soon as a handler returns True, the dispatching stops.
+ |      
+ |              The function collects all the positional and keyword arguments and
+ |              passes them on to the handlers.
+ |      
+ |              .. note::
+ |                  The handlers are called in reverse order than they were registered
+ |                  with :meth:`bind`.
+ |      
+ |              :Parameters:
+ |                  `event_type`: basestring
+ |                      the event name to dispatch.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  Keyword arguments collection and forwarding was added. Before, only
+ |                  positional arguments would be collected and forwarded.
+ |  
+ |  dispatch_children(...)
+ |      EventDispatcher.dispatch_children(self, basestring event_type, *largs, **kwargs)
+ |  
+ |  dispatch_generic(...)
+ |      EventDispatcher.dispatch_generic(self, basestring event_type, *largs, **kwargs)
+ |  
+ |  events(...)
+ |      EventDispatcher.events(self)
+ |      Return all the events in the class. Can be used for introspection.
+ |      
+ |              .. versionadded:: 1.8.0
+ |  
+ |  fbind(...)
+ |      EventDispatcher.fbind(self, name, func, *largs, **kwargs)
+ |      A method for advanced, and typically faster binding. This method is
+ |              different than :meth:`bind` and is meant for more advanced users and
+ |              internal usage. It can be used as long as the following points are heeded.
+ |      
+ |              #. As opposed to :meth:`bind`, it does not check that this function and
+ |                 largs/kwargs has not been bound before to this name. So binding
+ |                 the same callback multiple times will just keep adding it.
+ |              #. Although :meth:`bind` creates a :class:`WeakMethod` of the callback when
+ |                 binding to an event or property, this method stores the callback
+ |                 directly, unless a keyword argument `ref` with value True is provided
+ |                 and then a :class:`WeakMethod` is saved.
+ |                 This is useful when there's no risk of a memory leak by storing the
+ |                 callback directly.
+ |              #. This method returns a unique positive number if `name` was found and
+ |                 bound, and `0`, otherwise. It does not raise an exception, like
+ |                 :meth:`bind` if the property `name` is not found. If not zero,
+ |                 the uid returned is unique to this `name` and callback and can be
+ |                 used with :meth:`unbind_uid` for unbinding.
+ |      
+ |      
+ |              When binding a callback with largs and/or kwargs, :meth:`funbind`
+ |              must be used for unbinding. If no largs and kwargs are provided,
+ |              :meth:`unbind` may be used as well. :meth:`unbind_uid` can be used in
+ |              either case.
+ |      
+ |              This method passes on any caught positional and/or keyword arguments to
+ |              the callback, removing the need to call partial. When calling the
+ |              callback the expended largs are passed on followed by instance/value
+ |              (just instance for kwargs) followed by expended kwargs.
+ |      
+ |              Following is an example of usage similar to the example in
+ |              :meth:`bind`::
+ |      
+ |                  class DemoBox(BoxLayout):
+ |      
+ |                      def __init__(self, **kwargs):
+ |                          super(DemoBox, self).__init__(**kwargs)
+ |                          self.orientation = "vertical"
+ |      
+ |                          btn = Button(text="Normal binding to event")
+ |                          btn.fbind('on_press', self.on_event)
+ |      
+ |                          btn2 = Button(text="Normal binding to a property change")
+ |                          btn2.fbind('state', self.on_property)
+ |      
+ |                          btn3 = Button(text="A: Using function with args.")
+ |                          btn3.fbind('on_press', self.on_event_with_args, 'right',
+ |                                         tree='birch', food='apple')
+ |      
+ |                          btn4 = Button(text="Unbind A.")
+ |                          btn4.fbind('on_press', self.unbind_a, btn3)
+ |      
+ |                          btn5 = Button(text="Use a flexible function")
+ |                          btn5.fbind('on_press', self.on_anything)
+ |      
+ |                          btn6 = Button(text="B: Using flexible functions with args. For hardcores.")
+ |                          btn6.fbind('on_press', self.on_anything, "1", "2", monthy="python")
+ |      
+ |                          btn7 = Button(text="Force dispatch B with different params")
+ |                          btn7.fbind('on_press', btn6.dispatch, 'on_press', 6, 7, monthy="other python")
+ |      
+ |                          for but in [btn, btn2, btn3, btn4, btn5, btn6, btn7]:
+ |                              self.add_widget(but)
+ |      
+ |                      def on_event(self, obj):
+ |                          print("Typical event from", obj)
+ |      
+ |                      def on_event_with_args(self, side, obj, tree=None, food=None):
+ |                          print("Event with args", obj, side, tree, food)
+ |      
+ |                      def on_property(self, obj, value):
+ |                          print("Typical property change from", obj, "to", value)
+ |      
+ |                      def on_anything(self, *args, **kwargs):
+ |                          print('The flexible function has *args of', str(args),
+ |                              "and **kwargs of", str(kwargs))
+ |                          return True
+ |      
+ |                      def unbind_a(self, btn, event):
+ |                          btn.funbind('on_press', self.on_event_with_args, 'right',
+ |                                          tree='birch', food='apple')
+ |      
+ |              .. note::
+ |      
+ |                  Since the kv lang uses this method to bind, one has to implement
+ |                  this method, instead of :meth:`bind` when creating a non
+ |                  :class:`EventDispatcher` based class used with the kv lang. See
+ |                  :class:`Observable` for an example.
+ |      
+ |              .. versionadded:: 1.9.0
+ |      
+ |              .. versionchanged:: 1.9.1
+ |                  The `ref` keyword argument has been added.
+ |  
+ |  funbind(...)
+ |      EventDispatcher.funbind(self, name, func, *largs, **kwargs)
+ |      Similar to :meth:`fbind`.
+ |      
+ |              When unbinding, :meth:`unbind` will unbind all callbacks that match the
+ |              callback, while this method will only unbind the first.
+ |      
+ |              To unbind, the same positional and keyword arguments passed to
+ |              :meth:`fbind` must be passed on to funbind.
+ |      
+ |              .. note::
+ |      
+ |                  It is safe to use :meth:`funbind` to unbind a function bound with
+ |                  :meth:`bind` as long as no keyword and positional arguments are
+ |                  provided to :meth:`funbind`.
+ |      
+ |              .. versionadded:: 1.9.0
+ |  
+ |  get_property_observers(...)
+ |      EventDispatcher.get_property_observers(self, name, args=False)
+ |      Returns a list of methods that are bound to the property/event
+ |             passed as the *name* argument::
+ |      
+ |                 widget_instance.get_property_observers('on_release')
+ |      
+ |             :Parameters:
+ |      
+ |                 `name`: str
+ |                     The name of the event or property.
+ |                 `args`: bool
+ |                     Whether to return the bound args. To keep compatibility,
+ |                     only the callback functions and not their provided args will
+ |                     be returned in the list when `args` is False.
+ |      
+ |                     If True, each element in the list is a 5-tuple of
+ |                     `(callback, largs, kwargs, is_ref, uid)`, where `is_ref` indicates
+ |                     whether `callback` is a weakref, and `uid` is the uid given by
+ |                     :meth:`fbind`, or None if :meth:`bind` was used. Defaults to `False`.
+ |      
+ |             :Returns:
+ |                 The list of bound callbacks. See `args` for details.
+ |      
+ |             .. versionadded:: 1.8.0
+ |      
+ |             .. versionchanged:: 1.9.0
+ |                 `args` has been added.
+ |  
+ |  getter(...)
+ |      EventDispatcher.getter(self, name)
+ |      Return the getter of a property.
+ |      
+ |              .. versionadded:: 1.0.9
+ |  
+ |  is_event_type(...)
+ |      EventDispatcher.is_event_type(self, basestring event_type)
+ |      Return True if the event_type is already registered.
+ |      
+ |              .. versionadded:: 1.0.4
+ |  
+ |  properties(...)
+ |      EventDispatcher.properties(self) -> dict
+ |      Return all the properties in the class in a dictionary of
+ |              key/property class. Can be used for introspection.
+ |      
+ |              .. versionadded:: 1.0.9
+ |  
+ |  property(...)
+ |      EventDispatcher.property(self, name, quiet=False)
+ |      Get a property instance from the property name. If quiet is True,
+ |              None is returned instead of raising an exception when `name` is not a
+ |              property. Defaults to `False`.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              :return:
+ |      
+ |                  A :class:`~kivy.properties.Property` derived instance
+ |                  corresponding to the name.
+ |      
+ |              .. versionchanged:: 1.9.0
+ |                  quiet was added.
+ |  
+ |  register_event_type(...)
+ |      EventDispatcher.register_event_type(self, basestring event_type)
+ |      Register an event type with the dispatcher.
+ |      
+ |              Registering event types allows the dispatcher to validate event handler
+ |              names as they are attached and to search attached objects for suitable
+ |              handlers. Each event type declaration must:
+ |      
+ |                  1. start with the prefix `on_`.
+ |                  2. have a default handler in the class.
+ |      
+ |              Example of creating a custom event::
+ |      
+ |                  class MyWidget(Widget):
+ |                      def __init__(self, **kwargs):
+ |                          super(MyWidget, self).__init__(**kwargs)
+ |                          self.register_event_type('on_swipe')
+ |      
+ |                      def on_swipe(self):
+ |                          pass
+ |      
+ |                  def on_swipe_callback(*largs):
+ |                      print('my swipe is called', largs)
+ |                  w = MyWidget()
+ |                  w.dispatch('on_swipe')
+ |  
+ |  setter(...)
+ |      EventDispatcher.setter(self, name)
+ |      Return the setter of a property. Use: instance.setter('name').
+ |              The setter is a convenient callback function useful if you want
+ |              to directly bind one property to another.
+ |              It returns a partial function that will accept
+ |              (obj, value) args and results in the property 'name' of instance
+ |              being set to value.
+ |      
+ |              .. versionadded:: 1.0.9
+ |      
+ |              For example, to bind number2 to number1 in python you would do::
+ |      
+ |                  class ExampleWidget(Widget):
+ |                      number1 = NumericProperty(None)
+ |                      number2 = NumericProperty(None)
+ |      
+ |                      def __init__(self, **kwargs):
+ |                          super(ExampleWidget, self).__init__(**kwargs)
+ |                          self.bind(number1=self.setter('number2'))
+ |      
+ |              This is equivalent to kv binding::
+ |      
+ |                  <ExampleWidget>:
+ |                      number2: self.number1
+ |  
+ |  unbind(...)
+ |      EventDispatcher.unbind(self, **kwargs)
+ |      Unbind properties from callback functions with similar usage as
+ |              :meth:`bind`.
+ |      
+ |              If a callback has been bound to a given event or property multiple
+ |              times, only the first occurrence will be unbound.
+ |      
+ |              .. note::
+ |      
+ |                  It is safe to use :meth:`unbind` on a function bound with :meth:`fbind`
+ |                  as long as that function was originally bound without any keyword and
+ |                  positional arguments. Otherwise, the function will fail to be unbound
+ |                  and you should use :meth:`funbind` instead.
+ |  
+ |  unbind_uid(...)
+ |      EventDispatcher.unbind_uid(self, name, uid)
+ |      Uses the uid returned by :meth:`fbind` to unbind the callback.
+ |      
+ |              This method is much more efficient than :meth:`funbind`. If `uid`
+ |              evaluates to False (e.g. 0) a `ValueError` is raised. Also, only
+ |              callbacks bound with :meth:`fbind` can be unbound with this method.
+ |      
+ |              Since each call to :meth:`fbind` will generate a unique `uid`,
+ |              only one callback will be removed. If `uid` is not found among the
+ |              callbacks, no error is raised.
+ |      
+ |              E.g.::
+ |      
+ |                  btn6 = Button(text="B: Using flexible functions with args. For hardcores.")
+ |                  uid = btn6.fbind('on_press', self.on_anything, "1", "2", monthy="python")
+ |                  if not uid:
+ |                      raise Exception('Binding failed').
+ |                  ...
+ |                  btn6.unbind_uid('on_press', uid)
+ |      
+ |              .. versionadded:: 1.9.0
+ |  
+ |  unregister_event_types(...)
+ |      EventDispatcher.unregister_event_types(self, basestring event_type)
+ |      Unregister an event type in the dispatcher.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from kivy._event.EventDispatcher:
+ |  
+ |  __new__(*args, **kwargs) from builtins.type
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from kivy._event.EventDispatcher:
+ |  
+ |  __pyx_vtable__ = <capsule object NULL>
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from kivy._event.ObjectWithUid:
+ |  
+ |  uid
