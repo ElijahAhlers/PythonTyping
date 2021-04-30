@@ -123,6 +123,7 @@ class HomeWindow(GridLayout):
       def Games(self):
             self.parent.parent.GamesMenu()
             self.parent.parent.current = 'Games Menu'
+            Window.fullscreen = 'auto'
 
       def typingHistory(self):
             self.parent.parent.TypingHistory()

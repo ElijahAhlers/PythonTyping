@@ -76,6 +76,7 @@ class TypingHistory(BoxLayout):
     
     def __init__(self,user,**kwargs):
         Builder.load_file('KivyGraphicFiles/TypingHistory.kv')
+        print('self.ids is:', self.ids)
         super().__init__(**kwargs)
         self.username = user.username
         self.addTable(self.username)

@@ -18,44 +18,43 @@ def best_scores(scores):
 
     different_games = []
     scores.sort(key=lambda x: x['name'])
-    different_games += scores[0]['name']
+    different_games += [scores[0]['name']]
     for score in scores:
-        if score['name'] is not different_games[-1]:
+        if score['name'] != different_games[-1]:
             different_games += [score['name']]
 
     best_games = []
     for name in different_games:
-        best_game = sorted([x for x in scores if x['name'] == name], key=lambda x: x['score'])
-        if best_game:
-            best_games += [
-                best_game[-1]
-            ]
+        best_games += [sorted([x for x in scores if x['name'] == name], key=lambda x: int(x['score']), reverse=True)[0]]
+
     return best_games
 
 
 class MenuScreen(Screen):
 
     gameGrid = ObjectProperty(None)
-    all_results = []
-    best_results = []
+    all_results = [{'name': 'Name', 'date': 'Date', 'score': 'Score', 'time': 'Time'}]
+    best_results = [{'name': 'Name', 'date': 'Date', 'score': 'Score', 'time': 'Time'}]
 
     def load_results(self):
         if os.path.exists(open('Save Location.txt').read(
                 )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv'):
-            self.all_results = [
+
+            data = CSVFuncs.readCSVFile(open('Save Location.txt').read(
+                    )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv')
+
+            self.ids.all_results.data = [
                          {'name': 'Name', 'date': 'Date', 'score': 'Score', 'time': 'Time'}
-                     ] + sorted(CSVFuncs.readCSVFile(open('Save Location.txt').read(
-                        )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv'),
-                                key=lambda x: x['date'])
-            self.best_results = [
+                     ] + sorted(data, key=lambda x: (x['date'],x['time_of_day']), reverse=True)
+
+            self.ids.best_results.data = [
                           {'name': 'Name', 'date': 'Date', 'score': 'Score', 'time': 'Time'}
-                      ] + sorted(
-                best_scores(CSVFuncs.readCSVFile(open('Save Location.txt').read(
-                    )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv')),
-                key=lambda x: x['name'])
+                      ] + sorted(best_scores(data), key=lambda x: x['name'])
     
     def exit(self):
+        print('ran')
         self.get_root_window().children[0].current = 'LessonSelectScreen'
+        Window.fullscreen = False
 
 
 class GameLayout(GridLayout):
@@ -97,18 +96,19 @@ class GamesMaster(ScreenManager):
         self.current = 'Game Picker'
 
     def record_results(self, game_name, score, time):
-        path = open('Save Location.txt').read()+'UserData/'+self.user.username+'/GamesHistory/GamesHistory.csv'
+        path = open('Save Location.txt').read()+'UserData/'+self.user.username+'/GamesHistory.csv'
         new_dic = {
             'name': game_name,
             'date': datetime.date.today().strftime("%m-%d-%y"),
-            'score': str(score),
-            'time': time
+            'score': str(int(score)),
+            'time': str(int(time)),
+            'time_of_day': int((datetime.datetime.now() - datetime.datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0)).total_seconds())
         }
-        print(new_dic)
         if os.path.exists(path):
             CSVFuncs.writeToCSVFile(path, [new_dic])
         else:
-            CSVFuncs.writeNewCSVFile(path, ['name', 'date', 'score', 'time'], [new_dic])
+            CSVFuncs.writeNewCSVFile(path, ['name', 'date', 'score', 'time', 'time_of_day'], [new_dic])
 
 
 gameManager = GamesMaster()
@@ -116,7 +116,7 @@ gameManager = GamesMaster()
 gameScreensAndButtons = []
 
 for gameName in [file for file in os.listdir('Games')
-                 if 'GamesMenu' not in file and 'Modules' not in file and '__' not in file]:
+                 if 'GamesMenu' not in file and 'Instructions' not in file and '__' not in file]:
     newGame = Screen(name=gameName)
     exec('from Games.{0}.{0} import {0}_Layout as Game'.format(gameName))
     newGame.add_widget(Game(gameManager))

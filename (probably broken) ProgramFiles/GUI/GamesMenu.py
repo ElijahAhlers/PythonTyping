@@ -29,7 +29,7 @@ for game in os.listdir(os.getcwd()+'/Games'):
                 Label:
                     font_size: '20sp'
                     text_size: self.size
-                    text: '"""+str(open(os.getcwd()+'\\Games\\'+game+'\\Discription.txt',mode = 'r').read())+"""'
+                    text: '"""+str(open(os.getcwd()+'\\Games\\'+game+'\\description.txt',mode = 'r').read())+"""'
                     valign: 'middle'"""
     
 for i in range(10-(len(os.listdir(os.getcwd()+'/Games')))):

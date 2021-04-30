@@ -11,31 +11,33 @@ from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
-from random import random,randint,choice
+from random import random, randint, choice
 
 person = ' o \n\\|/\n | \n/ \\'
+
 
 def randomBorderCoord():
     '''Makes a random coordinate on the border
         of the screen. screen coords are (0,0) to (1,1)'''
-    
-    #Decide if it should choose bottom/top or left/right
-    if randint(0,1):
 
-        #Bottom or top
+    #    Decide if it should choose bottom/top or left/right
+    if randint(0, 1):
+
+        #        Bottom or top
         #       0 or 1 # 0 thru 1
-        return random(),randint(0,1)
-    
+        return random(), randint(0, 1)
+
     else:
 
-        #Left or right
+        # Left or right
         #       0 thru 1   # 0 or 1
-        return randint(0,1),random()
+        return randint(0, 1), random()
+
 
 Builder.load_file('Games/Zerg_Rush/Zerg_Rush.kv')
 
-class Zerg_Rush_Layout(BoxLayout):
 
+class Zerg_Rush_Layout(BoxLayout):
     diff1 = ObjectProperty(None)
     diff2 = ObjectProperty(None)
     diff3 = ObjectProperty(None)
@@ -47,36 +49,41 @@ class Zerg_Rush_Layout(BoxLayout):
     beginInstructions = ObjectProperty(None)
     startButton = ObjectProperty(None)
     userInput = ObjectProperty(None)
-    
-    words = open('Games/Zerg_Rush/allwords.txt','r').read().split(' ')
+
+    words = open('Games/Zerg_Rush/allwords.txt', 'r').read().split(' ')
     currentDifficulty = 'Easy'
     started = False
     timeToCenter = 20
-    
-    difficultyLookUp = {
-        'Easy':{
-            'Frequency': 20,
-            'Ramping'  : .05
-            },
-        'Medium':{
-            'Frequency': 15,
-            'Ramping'  : .05
-            },
-        'Hard':{
-            'Frequency': 15,
-            'Ramping'  : .10
-            },
-        'Very Hard':{
-            'Frequency': 10,
-            'Ramping'  : .10
-            },
-        'Good Luck':{
-            'Frequency': 0,
-            'Ramping'  : 0
-            },
-        }
 
-    def __init__(self,manager,**kwargs):
+    difficultyLookUp = {
+        'Easy': {
+            'Frequency': 40,
+            'Ramping': 1.005,
+            'Multiplier': 1
+        },
+        'Medium': {
+            'Frequency': 30,
+            'Ramping': 1.0075,
+            'Multiplier': 2
+        },
+        'Hard': {
+            'Frequency': 30,
+            'Ramping': 1.010,
+            'Multiplier': 3
+        },
+        'Very Hard': {
+            'Frequency': 20,
+            'Ramping': 1.0125,
+            'Multiplier': 4
+        },
+        'Good Luck': {
+            'Frequency': 2,
+            'Ramping': 1,
+            'Multiplier': 20
+        },
+    }
+
+    def __init__(self, manager, **kwargs):
         super().__init__(**kwargs)
 
         self.manager = manager
@@ -87,30 +94,34 @@ class Zerg_Rush_Layout(BoxLayout):
         self.userInput.bind(text=self.checkSpacebar)
 
     def checkSpacebar(self, instence, value):
-        if value and value[-1] == ' ':
+        self.userInput.focus = True
+        if value and (value[-1] == ' ' or value[-1] == '\n'):
             if self.started:
                 self.attemptWordRemoval(value[:-1])
-            else:
-                self.start()
+            #            else:
+            #                self.start()
             self.userInput.text = ''
 
     def start(self):
+        self.time_counter = 0
         self.userInput.text = ''
         self.userInput.focus = True
         self.sinceLastSpawn = 1
         self.spawnFrequency = self.difficultyLookUp[self.currentDifficulty]['Frequency']
         self.difficultyRamping = self.difficultyLookUp[self.currentDifficulty]['Ramping']
+        self.scoreMultiplier = self.difficultyLookUp[self.currentDifficulty]['Multiplier']
         self.started = True
         self.score.text = '0'
         self.startButton.disabled = True
         self.endButton.text = 'Die Now'
         self.endButton.on_release = self.end
-        self.beginInstructions.text = ''
+        self.beginInstructions.text = '·'
         self.changeButtonDisabledPropertyForDifficultyButtons(True)
-        self.spawning = Clock.schedule_interval(self.update, .1)
+        self.spawning = Clock.schedule_interval(self.update, .05)
+        self.counting = Clock.schedule_interval(self.increment_timer, 1)
 
     def end(self):
-        self.manager.record_results('Zerg Rush', self.score.text, 0)
+        self.manager.record_results('Zerg Rush', self.score.text, self.time_counter)
         self.started = False
         self.startButton.disabled = False
         self.endButton.text = 'Exit'
@@ -118,38 +129,42 @@ class Zerg_Rush_Layout(BoxLayout):
         self.beginInstructions.text = 'You Died'
         self.chgDif(self.currentDifficulty)
         Clock.unschedule(self.spawning)
+        Clock.unschedule(self.counting)
         for label in self.allSpawns:
             label.parent.remove_widget(label)
         self.allSpawns = []
         self.wordSpawns = []
-        
-    def update(self,dt):
+
+    def increment_timer(self, interval):
+        self.time_counter += 1
+
+    def update(self, dt):
         self.sinceLastSpawn += 1
         if self.sinceLastSpawn >= self.spawnFrequency:
             self.sinceLastSpawn = 0
-            self.spawnFrequency-=self.difficultyRamping
+            self.spawnFrequency = self.spawnFrequency / self.difficultyRamping
             self.spawnNew()
 
     def spawnNew(self):
         word = choice(self.words)
-        x,y = randomBorderCoord()
-        label = Label(text=word,size_hint=[.2,.2],pos_hint={'x':x-.1,'y':y-.1})
+        x, y = randomBorderCoord()
+        label = Label(text=word, size_hint=[.2, .2], pos_hint={'x': x - .1, 'y': y - .1})
         self.gameScreen.add_widget(label)
         movement = Animation(
-            pos_hint={'x':.4,'y':.4},
+            pos_hint={'x': .4, 'y': .4},
             duration=self.timeToCenter)
         movement.bind(on_complete=self.spawnReachedCenter)
         movement.start(label)
-        self.allSpawns+=[label]
-        self.wordSpawns+=[word]
+        self.allSpawns += [label]
+        self.wordSpawns += [word]
 
-    def spawnReachedCenter(self,animation, label):
+    def spawnReachedCenter(self, animation, label):
         if label in self.allSpawns:
             self.end()
 
     def attemptWordRemoval(self, word):
         if word in self.wordSpawns:
-            self.ids.score.text = str(int(self.ids.score.text)+(len(word)*self.scoreMultiplier))
+            self.ids.score.text = str(int(self.ids.score.text) + (len(word) * self.scoreMultiplier))
             index = self.wordSpawns.index(word)
             self.allSpawns[index].parent.remove_widget(self.allSpawns[index])
             self.allSpawns.pop(index)
@@ -157,11 +172,10 @@ class Zerg_Rush_Layout(BoxLayout):
 
     def chgDif(self, newDifficulty):
         self.changeButtonDisabledPropertyForDifficultyButtons(False)
-        numericDiff = list(self.difficultyLookUp.keys()).index(newDifficulty)+1
+        numericDiff = list(self.difficultyLookUp.keys()).index(newDifficulty) + 1
         exec('self.diff{0}.disabled = True'.format(
             str(numericDiff)))
         self.currentDifficulty = newDifficulty
-        self.scoreMultiplier = numericDiff
 
     def changeButtonDisabledPropertyForDifficultyButtons(self, abool):
         self.diff1.disabled = abool
@@ -174,10 +188,12 @@ class Zerg_Rush_Layout(BoxLayout):
         if not self.started:
             self.manager.leave_me()
 
+
 if __name__ == '__main__':
     class Root(App):
         def build(self):
             return Zerg_Rush_Layout()
+
 
     root = Root()
     root.run()

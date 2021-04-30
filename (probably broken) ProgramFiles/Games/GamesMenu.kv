@@ -107,33 +107,51 @@
 			GridLayout:
 				cols: 1
 				size_hint_x: .3
+
+				GridLayout:
+				    size_hint_y: .35
+				    rows: 2
+
+				    Label:
+				        size_hint_y: .2
+				        text: 'Best Results'
 					
-				RecycleView:
-					viewclass: 'ChartRow'
-					size_hint_y: .35
-					data: root.best_results
-					
-					RecycleBoxLayout:
-						default_size: None, dp(23)
-						default_size_hint: 1, None
-						size_hint_y: None
-						height: self.minimum_height
-						orientation: 'vertical'
+                    RecycleView:
+                        id: best_results
+                        viewclass: 'ChartRow'
+                        size_hint_y: .8
+                        data: []
+
+                        RecycleBoxLayout:
+                            default_size: None, dp(23)
+                            default_size_hint: 1, None
+                            size_hint_y: None
+                            height: self.minimum_height
+                            orientation: 'vertical'
 
 				Label:
 				    size_hint_y: .05
-				
-				RecycleView:
-					viewclass: 'ChartRow2'
-					size_hint_y: .7
-					data: root.all_results
 
-					RecycleBoxLayout:
-						default_size: None, dp(23)
-						default_size_hint: 1, None
-						size_hint_y: None
-						height: self.minimum_height
-						orientation: 'vertical'
+				GridLayout:
+				    size_hint_y: .7
+				    rows: 2
+
+				    Label:
+				        size_hint_y: .1
+				        text: 'All Results'
+
+                    RecycleView:
+                        id: all_results
+                        viewclass: 'ChartRow2'
+                        size_hint_y: .9
+                        data: []
+
+                        RecycleBoxLayout:
+                            default_size: None, dp(23)
+                            default_size_hint: 1, None
+                            size_hint_y: None
+                            height: self.minimum_height
+                            orientation: 'vertical'
 			
 		Button:
 			size_hint_y: 0.1
@@ -145,17 +163,27 @@
     cols:1
 	button: button
 	description: description
+
+	GridLayout:
+	    size_hint_x: .9
+	    rows: 2
 	
-    Button:
-		id: button
-		size_hint_y: .3
-        text: ''
-        on_press: root.pressed(self.text)
-	
+        Button:
+            id: button
+            size_hint_y: .25
+            text: ''
+            on_press: root.pressed(self.text)
+
+        Label:
+            id: description
+            size_hint_y: .65
+            font_size: '20sp'
+            text_size: self.size
+            text: ''
+            valign: 'top'
+
+        Label:
+            size_hint_y: .1
+
     Label:
-		id: description
-		ize_hint_y: .7
-        font_size: '20sp'
-        text_size: self.size
-        text: ''
-        valign: 'top'
+        size_hint_x: .1
