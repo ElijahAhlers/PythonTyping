@@ -7,7 +7,7 @@ def GetUsernamesAndPasswords():
         OrderedDict([('Username',username), ('Password',password)])
     Parameters: None
     Returns: List of Dictionaries'''
-    columns = ['Username','Registered','Password']
+    columns = ['Username','Password','Registered']
     file = open(open('Save Location.txt').read()+'UserData/UsernameAndPasswordHashed.csv','r')
     reader = csv.DictReader(file, fieldnames=columns)
     returningList = []

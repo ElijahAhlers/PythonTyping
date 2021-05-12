@@ -1,11 +1,8 @@
 #Python Standard Library
-import sys
+from os.path import exists as file_exists
 import threading as thread
 import time as perf
-from os import listdir
-import datetime
 from datetime import date
-import traceback
 import logging
 
 
@@ -270,11 +267,29 @@ class ResultsWindow(BoxLayout):
         self.averageAccuracy,self.averageWPM = round(sum(accuracies)/len(accuracies),1),round(sum(wpms)/len(wpms),0)
 
     def recordFinalResults(self):
-        ce.writeToCSVFile(self.parent.parent.location+'/UserData/'+self.user.username+'/history.csv',[{'Date':date.today().strftime("%m/%d/%y"),
-                                                                                                        'Lesson':self.lessonName,
-                                                                                                        'Accuracy':round(self.averageAccuracy,0),
-                                                                                                        'WPM':round(self.averageWPM,0),
-                                                                                                        'IdleTime':self.idleTime}])
+
+        path = self.parent.parent.location+'/UserData/'+self.user.username+'/history.csv'
+        if file_exists(path):
+            ce.writeToCSVFile(
+                path,
+                [{
+                    'Date':date.today().strftime("%m/%d/%y"),
+                    'Lesson':self.lessonName,
+                    'Accuracy':round(self.averageAccuracy,0),
+                    'WPM':round(self.averageWPM,0),
+                    'IdleTime':self.idleTime
+                }])
+        else:
+            ce.writeNewCSVFile(
+                path,
+                ['Date', 'Lesson', 'Accuracy', 'WPM', 'IdleTime'],
+                [{
+                    'Date':date.today().strftime("%m/%d/%y"),
+                    'Lesson':self.lessonName,
+                    'Accuracy':round(self.averageAccuracy,0),
+                    'WPM':round(self.averageWPM,0),
+                    'IdleTime':self.idleTime
+                }])
         self.parent.parent.resultsObject.recordReslus()
     
     def exit(self,fromRedo = False):

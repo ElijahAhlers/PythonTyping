@@ -4,7 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
+from Games.Modules.NoBackspaceEntry import NoBackspaceEntry
 from kivy.uix.screenmanager import Screen
 from kivy.animation import Animation
 from kivy.lang import Builder
@@ -20,11 +20,11 @@ def randomBorderCoord():
     '''Makes a random coordinate on the border
         of the screen. screen coords are (0,0) to (1,1)'''
 
-    #    Decide if it should choose bottom/top or left/right
+    #Decide if it should choose bottom/top or left/right
     if randint(0, 1):
 
-        #        Bottom or top
-        #       0 or 1 # 0 thru 1
+        #Bottom or top
+        #0 or 1 # 0 thru 1
         return random(), randint(0, 1)
 
     else:
@@ -50,7 +50,7 @@ class Zerg_Rush_Layout(BoxLayout):
     startButton = ObjectProperty(None)
     userInput = ObjectProperty(None)
 
-    words = open('Games/Zerg_Rush/allwords.txt', 'r').read().split(' ')
+    words = open('Games/Modules/allwords.txt', 'r').read().split(' ')
     currentDifficulty = 'Easy'
     started = False
     timeToCenter = 20
@@ -59,27 +59,27 @@ class Zerg_Rush_Layout(BoxLayout):
         'Easy': {
             'Frequency': 40,
             'Ramping': 1.005,
-            'Multiplier': 1
+            'Multiplier': 2  # 1  (typed 1338 characters  score 2676 on 5/6  342 seconds)
         },
         'Medium': {
             'Frequency': 30,
             'Ramping': 1.0075,
-            'Multiplier': 2
+            'Multiplier': 4  # 2  (typed 784 characters  score 3136 on 5/6  171 seconds)
         },
         'Hard': {
-            'Frequency': 30,
+            'Frequency': 26,  # 30,
             'Ramping': 1.010,
-            'Multiplier': 3
+            'Multiplier': 6  # 3  (typed 549 characters  score 3276 on 5/6  118 seconds)
         },
         'Very Hard': {
-            'Frequency': 20,
-            'Ramping': 1.0125,
-            'Multiplier': 4
+            'Frequency': 22,  # 20,
+            'Ramping': 1.015,
+            'Multiplier': 9  # 4  (typed 388 characters  score 3492 on 5/6  75 seconds)
         },
         'Good Luck': {
-            'Frequency': 2,
+            'Frequency': 6,  # 2,
             'Ramping': 1,
-            'Multiplier': 20
+            'Multiplier': 18  # (typed 202 characters  score 3636 on 5/6  34 seconds)
         },
     }
 
@@ -87,6 +87,7 @@ class Zerg_Rush_Layout(BoxLayout):
         super().__init__(**kwargs)
 
         self.manager = manager
+        self.userInput.disable_backspace = not self.manager.allow_backspace
         self.chgDif(self.currentDifficulty)
 
         self.allSpawns = []
@@ -98,8 +99,8 @@ class Zerg_Rush_Layout(BoxLayout):
         if value and (value[-1] == ' ' or value[-1] == '\n'):
             if self.started:
                 self.attemptWordRemoval(value[:-1])
-            #            else:
-            #                self.start()
+            # else:
+            #   self.start()
             self.userInput.text = ''
 
     def start(self):

@@ -113,6 +113,7 @@ class HomeWindow(GridLayout):
             Builder.load_string(dropdownFoundation)
       
       def ExitButton(self):
+            print('at lest you tried')
             self.parent.parent.parent.parent.parent.close()
 
       def changePassword(self):
@@ -122,6 +123,7 @@ class HomeWindow(GridLayout):
       def Games(self):
             self.parent.parent.GamesMenu()
             self.parent.parent.current = 'Games Menu'
+            Window.fullscreen = 'auto'
 
       def typingHistory(self):
             self.parent.parent.TypingHistory()

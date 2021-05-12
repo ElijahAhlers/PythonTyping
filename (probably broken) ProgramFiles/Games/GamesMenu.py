@@ -38,10 +38,10 @@ class MenuScreen(Screen):
 
     def load_results(self):
         if os.path.exists(open('Save Location.txt').read(
-                )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv'):
+                )+'UserData/'+self.the_manager.user.username+'/GamesHistory.csv'):
 
             data = CSVFuncs.readCSVFile(open('Save Location.txt').read(
-                    )+'UserData/'+self.the_manager.user.username+'/GamesHistory/GamesHistory.csv')
+                    )+'UserData/'+self.the_manager.user.username+'/GamesHistory.csv')
 
             self.ids.all_results.data = [
                          {'name': 'Name', 'date': 'Date', 'score': 'Score', 'time': 'Time'}
@@ -84,6 +84,8 @@ class GamesMaster(ScreenManager):
         self.screen = MenuScreen(name='Game Picker')
         self.screen.the_manager = self
         self.add_widget(self.screen)
+        self.allow_backspace = True if open(
+            open('Save Location.txt').read()+'allow_backspace.txt').read()=='True' else False
 
     def make_game_buttons(self):
         for game, layout in gameScreensAndButtons:
@@ -116,7 +118,7 @@ gameManager = GamesMaster()
 gameScreensAndButtons = []
 
 for gameName in [file for file in os.listdir('Games')
-                 if 'GamesMenu' not in file and 'Instructions' not in file and '__' not in file]:
+            if 'GamesMenu' not in file and 'Instructions' not in file and '__' not in file and 'Modules' not in file]:
     newGame = Screen(name=gameName)
     exec('from Games.{0}.{0} import {0}_Layout as Game'.format(gameName))
     newGame.add_widget(Game(gameManager))

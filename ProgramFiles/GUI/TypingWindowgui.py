@@ -6,6 +6,7 @@ from time import sleep
 import time
 import logging
 from os.path import exists as fileExists
+import os
 
 
 #Pynput stuff
@@ -19,7 +20,6 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.lang import Builder
-#from kivy.core.image import Image
 from kivy.uix.image import AsyncImage
 from kivy.core.window import Window
 from kivy.uix.progressbar import ProgressBar
@@ -442,7 +442,12 @@ class TypingWindow(GridLayout):
 
     def recordResults(self):
         fileAlreadyMade = True
-        file = self.parent.parent.location+'/UserData/'+self.user.username+'/History/'+str(date.today())+self.day.lessonName+'.csv'
+        file = self.parent.parent.location+'/UserData/'+self.user.username+'/History'
+
+        if not fileExists(file):
+            os.mkdir(file)
+
+        file += '/'+str(date.today())+self.day.lessonName+'.csv'
         
         if fileExists(file):            
             writeToCSVFile(file,[{'Lesson':self.lesson.filename,

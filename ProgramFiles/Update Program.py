@@ -54,8 +54,7 @@ builderfile = '''
 '''*4+'''
         
         Button:
-            id: CloseButton
-            disabled: True
+
             text: 'Close'
             on_press: root.Exit()
 
@@ -84,7 +83,9 @@ class UpdateScreen(GridLayout):
         self.updateTheProgram(0)
 
     def Exit(self):
-        self.get_root_window().close()
+        print(self.get_root_window().children[0])
+        if self.ids.percentprogress.value > 97:
+            self.get_root_window().close()
 
     def startClock(self,dummyvar):
         Thread(target=self.barTick).start()
@@ -102,7 +103,11 @@ class UpdateScreen(GridLayout):
             else:
                 os.remove(item)
         for item in os.listdir(location+'ProgramFiles'):
+            print(item)
+            print(sys.path[0])
             currentDir = location+'ProgramFiles/'+item
+            print(currentDir)
+            print()
             try:
                 shutil.copytree(currentDir,sys.path[0]+'/'+item)
             except:
@@ -116,9 +121,8 @@ class UpdateScreen(GridLayout):
             self.pbvalue += randomtick if self.pbvalue+randomtick < 97 else (97-self.pbvalue if not self.canFinish else 100-self.pbvalue)
             self.ids.percentprogress.value = self.pbvalue
             sleeptime = random()
+            print(sleeptime)
             sleep(sleeptime)
-            if self.ids.percentprogress.value > 97:
-                self.ids.CloseButton.disabled = False
 
 
 

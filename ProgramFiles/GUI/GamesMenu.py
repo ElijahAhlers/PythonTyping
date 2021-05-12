@@ -29,7 +29,7 @@ for game in os.listdir(os.getcwd()+'/Games'):
                 Label:
                     font_size: '20sp'
                     text_size: self.size
-                    text: 'Type all the letters before time runs out!'
+                    text: '"""+str(open(os.getcwd()+'\\Games\\'+game+'\\description.txt',mode = 'r').read())+"""'
                     valign: 'middle'"""
     
 for i in range(10-(len(os.listdir(os.getcwd()+'/Games')))):
